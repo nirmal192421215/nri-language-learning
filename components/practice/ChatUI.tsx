@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Pressable, ScrollView, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
 import Animated, { FadeInUp, SlideInRight, SlideInLeft } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { generateTutorResponse } from '../../utils/ai';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'expo-router';
@@ -22,6 +23,23 @@ export default function ChatUI({ skill, title }: { skill: string, title: string 
   const [leveledUp, setLeveledUp] = useState(false);
   const [newTier, setNewTier] = useState('');
 
+  const chatStorageKey = `@chat_${user?.id || 'guest'}_${user?.learningLanguage || 'default'}_${skill}`;
+
+  useEffect(() => {
+    const loadChat = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(chatStorageKey);
+        if (stored) {
+          setMessages(JSON.parse(stored));
+          setTimeout(() => scrollViewRef.current?.scrollToEnd({ animated: false }), 100);
+        }
+      } catch (e) {
+        console.log("Failed to load chat history", e);
+      }
+    };
+    loadChat();
+  }, [chatStorageKey]);
+
   const handleSend = async () => {
     if (!inputText.trim()) return;
 
@@ -31,6 +49,7 @@ export default function ChatUI({ skill, title }: { skill: string, title: string 
     const newUserMsg: Message = { id: Date.now().toString(), text: userMessage, sender: 'user' };
     const newMessages = [...messages, newUserMsg];
     setMessages(newMessages);
+    AsyncStorage.setItem(chatStorageKey, JSON.stringify(newMessages));
     setIsTyping(true);
 
     setTimeout(() => scrollViewRef.current?.scrollToEnd({ animated: true }), 100);
@@ -40,9 +59,17 @@ export default function ChatUI({ skill, title }: { skill: string, title: string 
 
     try {
       const response = await generateTutorResponse(historyString, userMessage, user?.level || "Beginner - Level 1", user?.learningLanguage || "tamil");
-      setMessages(prev => [...prev, { id: Date.now().toString(), text: response, sender: 'tutor' }]);
+      setMessages(prev => {
+        const next: Message[] = [...prev, { id: Date.now().toString(), text: response, sender: 'tutor' }];
+        AsyncStorage.setItem(chatStorageKey, JSON.stringify(next));
+        return next;
+      });
     } catch (err) {
-      setMessages(prev => [...prev, { id: Date.now().toString(), text: "I'm having trouble connecting right now. Let's try again.", sender: 'tutor' }]);
+      setMessages(prev => {
+        const next: Message[] = [...prev, { id: Date.now().toString(), text: "I'm having trouble connecting right now. Let's try again.", sender: 'tutor' }];
+        AsyncStorage.setItem(chatStorageKey, JSON.stringify(next));
+        return next;
+      });
     } finally {
       setIsTyping(false);
       setTimeout(() => scrollViewRef.current?.scrollToEnd({ animated: true }), 100);
