@@ -88,7 +88,7 @@ export default function DashboardScreen() {
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['#fdfbfb', '#ebedee']} style={StyleSheet.absoluteFill} />
+      <LinearGradient colors={['#F0FDF4', '#ecfdf5']} style={StyleSheet.absoluteFill} />
       
       {/* Soft animated background elements */}
       <View style={[styles.glowCircle, { top: -80, right: -20, backgroundColor: '#34D399' }]} />
