@@ -52,7 +52,7 @@ export default function QuizUI({ skill, title }: { skill: string, title: string 
             ? `Pro-level (native idioms, complex grammar, cultural nuances in ${lang})`
             : `Intermediate-level (sentence structure, tenses, conversational ${lang})`;
           const generated = await generatePracticeLesson(
-            `${levelLabel} assessment`,
+            `${levelLabel} ${title.toLowerCase()}`,
             user.level,
             lang
           );
