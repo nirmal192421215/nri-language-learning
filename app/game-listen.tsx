@@ -155,9 +155,19 @@ export default function GameListenScreen() {
     // The user must tap the headphone icon manually.
   }, [currentIndex, gameFinished, questions]);
 
+  const [showFallback, setShowFallback] = useState(false);
+
+  useEffect(() => {
+    // Reset fallback when question changes
+    setShowFallback(false);
+  }, [currentIndex]);
+
   const playAudio = () => {
     speakerScale.value = withSequence(withSpring(1.2, { damping: 8 }), withSpring(1));
-    Speech.speak(currentQ.target, { language: speechCode, rate: 0.9, pitch: 0.8 });
+    Speech.stop();
+    setTimeout(() => {
+      Speech.speak(currentQ.target, { language: speechCode, rate: 0.85, pitch: 1 });
+    }, 50);
   };
 
   const handleSelect = (idx: number) => {
@@ -198,6 +208,18 @@ export default function GameListenScreen() {
                 </Animated.View>
               </Pressable>
               <Text style={styles.instruction}>Tap to hear the word, then choose! 👇</Text>
+              
+              {!showFallback ? (
+                <Pressable onPress={() => setShowFallback(true)} style={{ marginTop: 15 }}>
+                  <Text style={{ fontFamily: Fonts.bodyReg, fontSize: 13, color: Colors.skyDark, textDecorationLine: 'underline' }}>
+                    Voice not playing? Tap here to show word
+                  </Text>
+                </Pressable>
+              ) : (
+                <Animated.View entering={FadeIn.duration(400)} style={{ marginTop: 15, paddingHorizontal: 20, paddingVertical: 8, backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: Radius.pill }}>
+                  <Text style={{ fontFamily: Fonts.heading, fontSize: 22, color: Colors.textDark }}>{currentQ.target}</Text>
+                </Animated.View>
+              )}
             </Animated.View>
 
             {/* Options */}
