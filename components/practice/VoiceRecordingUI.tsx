@@ -12,6 +12,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../context/AuthContext';
+import { Colors, Fonts, Radius, Shadow } from '../../components/KidsTheme';
 import { PRONOUNCE_GAME_POOLS, PRONOUNCE_INTERMEDIATE_POOLS, PRONOUNCE_PRO_POOLS } from '../../constants/translations';
 import ConfettiCannon from 'react-native-confetti-cannon';
 
@@ -375,19 +376,23 @@ const styles = StyleSheet.create({
     color: '#6B7280',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    fontWeight: '600',
-    marginBottom: 10,
+    fontFamily: Fonts.bodySemi,
+    marginBottom: 14,
+    textAlign: 'center',
   },
   targetWord: {
-    fontSize: 48,
-    fontWeight: 'bold',
+    fontSize: 42,
+    fontFamily: Fonts.heading,
     color: '#111827',
-    marginBottom: 5,
+    marginBottom: 10,
+    textAlign: 'center',
+    lineHeight: 52,
   },
   targetPhonetic: {
     fontSize: 20,
     color: '#10B981',
-    fontWeight: '500',
+    fontFamily: Fonts.bodySemi,
+    textAlign: 'center',
   },
   micContainer: {
     width: 150,
