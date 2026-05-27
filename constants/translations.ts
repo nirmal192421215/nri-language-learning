@@ -3491,3 +3491,520 @@ QUIZ_POOLS['german'] = [
     "correct": 0
   }
 ];
+
+// --- Auto-Appended Minigames ---
+LISTEN_GAME_POOLS['spanish'] = [
+  {
+    "target": "Hola",
+    "options": [
+      "Hola",
+      "Agua",
+      "Comida",
+      "Escuela"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Gracias",
+    "options": [
+      "Por favor",
+      "Gracias",
+      "Perdón",
+      "Sí"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Agua",
+    "options": [
+      "Manzana",
+      "Agua",
+      "Casa",
+      "Árbol"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Comida",
+    "options": [
+      "Libro",
+      "Amigo",
+      "Comida",
+      "Dinero"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Escuela",
+    "options": [
+      "Hospital",
+      "Oficina",
+      "Tienda",
+      "Escuela"
+    ],
+    "correct": 3
+  }
+];
+PICTURE_GAME_POOLS['spanish'] = [
+  {
+    "emoji": "🍎",
+    "options": [
+      "Manzana",
+      "Agua",
+      "Casa",
+      "Árbol"
+    ],
+    "correct": 0
+  },
+  {
+    "emoji": "🏠",
+    "options": [
+      "Escuela",
+      "Árbol",
+      "Casa",
+      "Templo"
+    ],
+    "correct": 2
+  },
+  {
+    "emoji": "🚗",
+    "options": [
+      "Coche",
+      "Bicicleta",
+      "Manzana",
+      "Tren"
+    ],
+    "correct": 0
+  },
+  {
+    "emoji": "🐕",
+    "options": [
+      "Gato",
+      "Perro",
+      "Caballo",
+      "Vaca"
+    ],
+    "correct": 1
+  },
+  {
+    "emoji": "🌳",
+    "options": [
+      "Flor",
+      "Árbol",
+      "Hoja",
+      "Coche"
+    ],
+    "correct": 1
+  }
+];
+SENTENCE_GAME_POOLS['spanish'] = [
+  {
+    "original": "Yo voy a la escuela",
+    "english": "I go to school",
+    "words": [
+      "Yo",
+      "voy",
+      "a",
+      "la",
+      "escuela"
+    ]
+  },
+  {
+    "original": "Él bebe agua",
+    "english": "He is drinking water",
+    "words": [
+      "Él",
+      "bebe",
+      "agua"
+    ]
+  },
+  {
+    "original": "Nosotros estamos jugando",
+    "english": "We are playing",
+    "words": [
+      "Nosotros",
+      "estamos",
+      "jugando"
+    ]
+  },
+  {
+    "original": "Ella lee un libro",
+    "english": "She reads a book",
+    "words": [
+      "Ella",
+      "lee",
+      "un",
+      "libro"
+    ]
+  },
+  {
+    "original": "Este es un libro",
+    "english": "This is a book",
+    "words": [
+      "Este",
+      "es",
+      "un",
+      "libro"
+    ]
+  }
+];
+GAME_POOLS['spanish'] = [
+  {
+    "text": "Hola",
+    "audio": "Hola"
+  },
+  {
+    "text": "Gracias",
+    "audio": "Gracias"
+  },
+  {
+    "text": "Agua",
+    "audio": "Agua"
+  },
+  {
+    "text": "Comida",
+    "audio": "Comida"
+  }
+];
+LISTEN_GAME_POOLS['french'] = [
+  {
+    "target": "Bonjour",
+    "options": [
+      "Bonjour",
+      "Eau",
+      "Nourriture",
+      "École"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Merci",
+    "options": [
+      "S'il vous plaît",
+      "Merci",
+      "Désolé",
+      "Oui"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Eau",
+    "options": [
+      "Pomme",
+      "Eau",
+      "Maison",
+      "Arbre"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Nourriture",
+    "options": [
+      "Livre",
+      "Ami",
+      "Nourriture",
+      "Argent"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "École",
+    "options": [
+      "Hôpital",
+      "Bureau",
+      "Magasin",
+      "École"
+    ],
+    "correct": 3
+  }
+];
+PICTURE_GAME_POOLS['french'] = [
+  {
+    "emoji": "🍎",
+    "options": [
+      "Pomme",
+      "Eau",
+      "Maison",
+      "Arbre"
+    ],
+    "correct": 0
+  },
+  {
+    "emoji": "🏠",
+    "options": [
+      "École",
+      "Arbre",
+      "Maison",
+      "Temple"
+    ],
+    "correct": 2
+  },
+  {
+    "emoji": "🚗",
+    "options": [
+      "Voiture",
+      "Vélo",
+      "Pomme",
+      "Train"
+    ],
+    "correct": 0
+  },
+  {
+    "emoji": "🐕",
+    "options": [
+      "Chat",
+      "Chien",
+      "Cheval",
+      "Vache"
+    ],
+    "correct": 1
+  },
+  {
+    "emoji": "🌳",
+    "options": [
+      "Fleur",
+      "Arbre",
+      "Feuille",
+      "Voiture"
+    ],
+    "correct": 1
+  }
+];
+SENTENCE_GAME_POOLS['french'] = [
+  {
+    "original": "Je vais à l'école",
+    "english": "I go to school",
+    "words": [
+      "Je",
+      "vais",
+      "à",
+      "l'école"
+    ]
+  },
+  {
+    "original": "Il boit de l'eau",
+    "english": "He is drinking water",
+    "words": [
+      "Il",
+      "boit",
+      "de",
+      "l'eau"
+    ]
+  },
+  {
+    "original": "Nous jouons",
+    "english": "We are playing",
+    "words": [
+      "Nous",
+      "jouons"
+    ]
+  },
+  {
+    "original": "Elle lit un livre",
+    "english": "She reads a book",
+    "words": [
+      "Elle",
+      "lit",
+      "un",
+      "livre"
+    ]
+  },
+  {
+    "original": "C'est un livre",
+    "english": "This is a book",
+    "words": [
+      "C'est",
+      "un",
+      "livre"
+    ]
+  }
+];
+GAME_POOLS['french'] = [
+  {
+    "text": "Bonjour",
+    "audio": "Bonjour"
+  },
+  {
+    "text": "Merci",
+    "audio": "Merci"
+  },
+  {
+    "text": "Eau",
+    "audio": "Eau"
+  },
+  {
+    "text": "Nourriture",
+    "audio": "Nourriture"
+  }
+];
+LISTEN_GAME_POOLS['german'] = [
+  {
+    "target": "Hallo",
+    "options": [
+      "Hallo",
+      "Wasser",
+      "Essen",
+      "Schule"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Danke",
+    "options": [
+      "Bitte",
+      "Danke",
+      "Entschuldigung",
+      "Ja"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Wasser",
+    "options": [
+      "Apfel",
+      "Wasser",
+      "Haus",
+      "Baum"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Essen",
+    "options": [
+      "Buch",
+      "Freund",
+      "Essen",
+      "Geld"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Schule",
+    "options": [
+      "Krankenhaus",
+      "Büro",
+      "Geschäft",
+      "Schule"
+    ],
+    "correct": 3
+  }
+];
+PICTURE_GAME_POOLS['german'] = [
+  {
+    "emoji": "🍎",
+    "options": [
+      "Apfel",
+      "Wasser",
+      "Haus",
+      "Baum"
+    ],
+    "correct": 0
+  },
+  {
+    "emoji": "🏠",
+    "options": [
+      "Schule",
+      "Baum",
+      "Haus",
+      "Tempel"
+    ],
+    "correct": 2
+  },
+  {
+    "emoji": "🚗",
+    "options": [
+      "Auto",
+      "Fahrrad",
+      "Apfel",
+      "Zug"
+    ],
+    "correct": 0
+  },
+  {
+    "emoji": "🐕",
+    "options": [
+      "Katze",
+      "Hund",
+      "Pferd",
+      "Kuh"
+    ],
+    "correct": 1
+  },
+  {
+    "emoji": "🌳",
+    "options": [
+      "Blume",
+      "Baum",
+      "Blatt",
+      "Auto"
+    ],
+    "correct": 1
+  }
+];
+SENTENCE_GAME_POOLS['german'] = [
+  {
+    "original": "Ich gehe zur Schule",
+    "english": "I go to school",
+    "words": [
+      "Ich",
+      "gehe",
+      "zur",
+      "Schule"
+    ]
+  },
+  {
+    "original": "Er trinkt Wasser",
+    "english": "He is drinking water",
+    "words": [
+      "Er",
+      "trinkt",
+      "Wasser"
+    ]
+  },
+  {
+    "original": "Wir spielen",
+    "english": "We are playing",
+    "words": [
+      "Wir",
+      "spielen"
+    ]
+  },
+  {
+    "original": "Sie liest ein Buch",
+    "english": "She reads a book",
+    "words": [
+      "Sie",
+      "liest",
+      "ein",
+      "Buch"
+    ]
+  },
+  {
+    "original": "Das ist ein Buch",
+    "english": "This is a book",
+    "words": [
+      "Das",
+      "ist",
+      "ein",
+      "Buch"
+    ]
+  }
+];
+GAME_POOLS['german'] = [
+  {
+    "text": "Hallo",
+    "audio": "Hallo"
+  },
+  {
+    "text": "Danke",
+    "audio": "Danke"
+  },
+  {
+    "text": "Wasser",
+    "audio": "Wasser"
+  },
+  {
+    "text": "Essen",
+    "audio": "Essen"
+  }
+];
