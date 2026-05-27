@@ -133,14 +133,16 @@ export default function DashboardScreen() {
   else if (user?.level?.includes('Intermediate')) tier = 'Intermediate';
 
   const completedModules = user?.completedModules || [];
-  const totalPillars = 4;
+  const totalPillars = 6;
   const completedCount = completedModules.length;
   const tierProgress = (completedCount / totalPillars) * 100;
   const nextTier = tier === 'Beginner' ? 'Intermediate' : tier === 'Intermediate' ? 'Pro' : 'Master';
 
   const ISLAND_CONFIGS = [
     { gradient: ['#38BDF8', '#0EA5E9'] as [string,string], iconBg: '#BAE6FD', xpColor: '#0284C7', btnColor: '#0284C7', borderColor: '#38BDF8', icon: 'Aa', title: 'Foundations', desc: tier === 'Beginner' ? 'Master the core letters!' : tier === 'Intermediate' ? 'Build flowing sentences!' : 'Translate complex text!', route: '/practice/foundations', duration: '10 min', xp: '+20 XP', moduleId: 'foundations' },
+    { gradient: ['#F59E0B', '#D97706'] as [string,string], iconBg: '#FEF3C7', xpColor: '#B45309', btnColor: '#B45309', borderColor: '#F59E0B', icon: '📚', title: 'Vocabulary', desc: tier === 'Beginner' ? 'Learn basic words!' : tier === 'Intermediate' ? 'Expand your lexicon!' : 'Master advanced terms!', route: '/practice/vocabulary', duration: '10 min', xp: '+25 XP', moduleId: 'vocabulary' },
     { gradient: ['#22C55E', '#16A34A'] as [string,string], iconBg: '#DCFCE7', xpColor: '#15803D', btnColor: '#15803D', borderColor: '#22C55E', icon: '👋', title: 'Communication', desc: tier === 'Beginner' ? 'Intro yourself in style!' : tier === 'Intermediate' ? 'Chat with the AI tutor!' : 'Speak at native speed!', route: '/practice/communication', duration: '15 min', xp: '+30 XP', moduleId: 'communication' },
+    { gradient: ['#F43F5E', '#E11D48'] as [string,string], iconBg: '#FFE4E6', xpColor: '#BE123C', btnColor: '#BE123C', borderColor: '#F43F5E', icon: '📖', title: 'Reading', desc: tier === 'Beginner' ? 'Read simple stories!' : tier === 'Intermediate' ? 'Comprehend paragraphs!' : 'Analyze native texts!', route: '/practice/reading', duration: '20 min', xp: '+40 XP', moduleId: 'reading' },
     { gradient: ['#F472B6', '#EC4899'] as [string,string], iconBg: '#FCE7F3', xpColor: '#BE185D', btnColor: '#BE185D', borderColor: '#F472B6', icon: '🎙️', title: 'Pronunciation', desc: tier === 'Beginner' ? 'Perfect your accent!' : tier === 'Intermediate' ? 'Say full sentences right!' : 'Master complex idioms!', route: '/practice/pronunciation', duration: '1 hr', xp: '+50 XP', moduleId: 'pronunciation' },
     { gradient: ['#A855F7', '#7C3AED'] as [string,string], iconBg: '#F3E8FF', xpColor: '#6D28D9', btnColor: '#6D28D9', borderColor: '#A855F7', icon: '📝', title: 'Assessment', desc: tier === 'Beginner' ? 'Test what you know!' : tier === 'Intermediate' ? 'Prove your fluency!' : 'Get certified! 🏅', route: '/practice/assessment', duration: '1 hr', xp: '+100 XP', moduleId: 'assessment' },
   ];
