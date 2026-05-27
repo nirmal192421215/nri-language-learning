@@ -80,7 +80,11 @@ export default function WelcomeScreen() {
   }, []);
 
   const monkeyStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: monkeyY.value }, { rotate: `${monkeyRot.value}deg` }],
+    transform: [{ translateY: monkeyY.value }],
+  }));
+
+  const earthStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${starSpin.value}deg` }],
   }));
 
   const buttonStyle = useAnimatedStyle(() => ({ transform: [{ scale: buttonScale.value }] }));
@@ -122,10 +126,10 @@ export default function WelcomeScreen() {
           <Text style={styles.subtitle}>Fun lessons. Real fluency. Every day! 🎉</Text>
         </Animated.View>
 
-        {/* Animated monkey mascot */}
+        {/* Animated earth mascot */}
         <Animated.View style={[styles.mascotWrapper, monkeyStyle]}>
           <View style={styles.mascotRing}>
-            <Text style={styles.mascotEmoji}>🐒</Text>
+            <Animated.Text style={[styles.mascotEmoji, earthStyle]}>🌍</Animated.Text>
           </View>
           {/* Speech bubble */}
           <View style={styles.speechBubble}>
