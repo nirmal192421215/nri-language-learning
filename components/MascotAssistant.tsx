@@ -1,114 +1,103 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Pressable, Platform } from 'react-native';
-import { useRouter } from 'expo-router';
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle, 
-  withRepeat, 
-  withTiming, 
-  withSequence, 
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  withSequence,
   Easing,
-  withSpring
+  withSpring,
 } from 'react-native-reanimated';
+import { Colors, Fonts, Radius, Shadow } from './KidsTheme';
 
-export default function MascotAssistant() {
-  const router = useRouter();
+interface MascotAssistantProps {
+  message?: string;
+}
+
+export default function MascotAssistant({ message = "Ready to learn today? 🚀" }: MascotAssistantProps) {
   const translateY = useSharedValue(0);
   const rotation = useSharedValue(0);
   const scale = useSharedValue(1);
-  const shadowOpacity = useSharedValue(0.3);
   const shadowScale = useSharedValue(1);
+  const bubbleScale = useSharedValue(0);
 
   useEffect(() => {
-    // Up and down float
+    // Float up/down
     translateY.value = withRepeat(
       withSequence(
-        withTiming(-12, { duration: 1500, easing: Easing.inOut(Easing.ease) }),
-        withTiming(0, { duration: 1500, easing: Easing.inOut(Easing.ease) })
+        withTiming(-14, { duration: 1600, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0, { duration: 1600, easing: Easing.inOut(Easing.ease) })
       ),
-      -1, // infinite
-      true // reverse
+      -1,
+      true
     );
 
-    // Slight rotation back and forth
+    // Gentle sway
     rotation.value = withRepeat(
       withSequence(
-        withTiming(-3, { duration: 1500, easing: Easing.inOut(Easing.ease) }),
-        withTiming(3, { duration: 1500, easing: Easing.inOut(Easing.ease) })
+        withTiming(-5, { duration: 1600, easing: Easing.inOut(Easing.ease) }),
+        withTiming(5, { duration: 1600, easing: Easing.inOut(Easing.ease) })
       ),
       -1,
       true
     );
 
-    // Shadow pulse inverse to translation
-    shadowOpacity.value = withRepeat(
-      withSequence(
-        withTiming(0.1, { duration: 1500, easing: Easing.inOut(Easing.ease) }),
-        withTiming(0.3, { duration: 1500, easing: Easing.inOut(Easing.ease) })
-      ),
-      -1,
-      true
-    );
-    
+    // Shadow breathe
     shadowScale.value = withRepeat(
       withSequence(
-        withTiming(0.8, { duration: 1500, easing: Easing.inOut(Easing.ease) }),
-        withTiming(1, { duration: 1500, easing: Easing.inOut(Easing.ease) })
+        withTiming(0.75, { duration: 1600, easing: Easing.inOut(Easing.ease) }),
+        withTiming(1, { duration: 1600, easing: Easing.inOut(Easing.ease) })
       ),
       -1,
       true
     );
+
+    // Bubble pop in
+    bubbleScale.value = withSpring(1, { damping: 10, stiffness: 120 });
   }, []);
 
-  const animatedMonkeyStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { translateY: translateY.value },
-        { rotate: `${rotation.value}deg` },
-        { scale: scale.value }
-      ]
-    };
-  });
+  const animatedMonkeyStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: translateY.value },
+      { rotate: `${rotation.value}deg` },
+      { scale: scale.value },
+    ],
+  }));
 
-  const animatedShadowStyle = useAnimatedStyle(() => {
-    return {
-      opacity: shadowOpacity.value,
-      transform: [{ scale: shadowScale.value }, { scaleY: 0.3 }]
-    };
-  });
+  const animatedShadowStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: shadowScale.value }, { scaleY: 0.25 }],
+  }));
 
-  const handlePressIn = () => {
-    scale.value = withSpring(1.1);
-  };
+  const bubbleAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: bubbleScale.value }],
+  }));
 
-  const handlePressOut = () => {
-    scale.value = withSpring(1);
-  };
+  const handlePressIn = () => { scale.value = withSpring(1.15, { damping: 8 }); };
+  const handlePressOut = () => { scale.value = withSpring(1, { damping: 8 }); };
 
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.monkeyWrapper, animatedMonkeyStyle]}>
-        <Pressable 
-          onPressIn={handlePressIn} 
-          onPressOut={handlePressOut}
-          onPress={() => router.push('/')}
-        >
-          {/* Glassmorphism Chat Bubble */}
-          <View style={styles.chatBubbleContainer}>
-            <View style={[styles.glassmorphism, Platform.OS === 'web' && styles.webGlass]}>
-              <Text style={styles.chatText}>Ready to learn today? 🚀</Text>
-            </View>
-            <View style={styles.bubbleTail} />
+        {/* Speech bubble */}
+        <Animated.View style={[styles.bubbleWrapper, bubbleAnimStyle]}>
+          <View style={styles.bubble}>
+            <Text style={styles.bubbleText}>{message}</Text>
           </View>
+          <View style={styles.bubbleTail} />
+        </Animated.View>
 
-          <Image 
-            source={require('../assets/avatars/monkey.png')} 
-            style={styles.monkeyImage} 
-          />
+        <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}>
+          <View style={styles.avatarRing}>
+            <Image
+              source={require('../assets/avatars/monkey.png')}
+              style={styles.monkeyImage}
+            />
+          </View>
         </Pressable>
       </Animated.View>
-      
-      {/* Subtle Shadow beneath the mascot */}
+
+      {/* Pulsing ground shadow */}
       <Animated.View style={[styles.shadow, animatedShadowStyle]} />
     </View>
   );
@@ -117,84 +106,81 @@ export default function MascotAssistant() {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 40,
-    right: 40,
+    bottom: 30,
+    right: 20,
     alignItems: 'center',
-    justifyContent: 'center',
     zIndex: 100,
   },
   monkeyWrapper: {
     alignItems: 'center',
-    justifyContent: 'center',
     zIndex: 2,
   },
-  monkeyImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 4,
-    borderColor: '#10B981', // Emerald green border
-    backgroundColor: '#fff',
-    // Strong shadow for 3D feel
-    ...Platform.select({
-      web: { boxShadow: '0px 15px 25px rgba(16, 185, 129, 0.4)' },
-      default: { elevation: 10, shadowColor: '#10B981', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.4, shadowRadius: 10 }
-    }),
-  },
-  shadow: {
-    width: 70,
-    height: 70,
-    backgroundColor: '#10B981',
-    borderRadius: 35,
+  bubbleWrapper: {
     position: 'absolute',
-    bottom: -15,
-    zIndex: 1,
-    ...Platform.select({
-      web: { filter: 'blur(8px)' },
-      default: {}
-    }),
-  },
-  chatBubbleContainer: {
-    position: 'absolute',
-    top: -55,
-    right: 60,
-    width: 200,
+    top: -70,
+    right: 110,
+    alignItems: 'flex-end',
     zIndex: 10,
   },
-  glassmorphism: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+  bubble: {
+    backgroundColor: '#FFFFFF',
     borderRadius: 20,
-    borderBottomRightRadius: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.85)', // Slightly more opaque for better readability
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
-    ...Platform.select({
-      web: { boxShadow: '0px 8px 16px rgba(0,0,0,0.1)' },
-      default: { elevation: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 8 }
-    })
+    borderBottomRightRadius: 4,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderWidth: 2.5,
+    borderColor: Colors.purple,
+    maxWidth: 200,
+    ...(Platform.OS === 'web'
+      ? { boxShadow: '0px 4px 16px rgba(168,85,247,0.25)' }
+      : { ...Shadow.purple }),
   },
-  webGlass: {
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)'
-  } as any,
+  bubbleText: {
+    fontFamily: Fonts.body,
+    fontSize: 13,
+    color: Colors.textDark,
+    textAlign: 'center',
+  },
   bubbleTail: {
     position: 'absolute',
-    bottom: -10,
-    right: 20,
+    bottom: -12,
+    right: 6,
     width: 0,
     height: 0,
     borderTopWidth: 12,
-    borderTopColor: 'rgba(255, 255, 255, 0.85)',
-    borderLeftWidth: 12,
+    borderTopColor: Colors.purple,
+    borderLeftWidth: 10,
     borderLeftColor: 'transparent',
-    borderRightWidth: 12,
+    borderRightWidth: 10,
     borderRightColor: 'transparent',
   },
-  chatText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#064E3B', // Dark emerald
-    textAlign: 'center',
-  }
+  avatarRing: {
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    borderWidth: 4,
+    borderColor: Colors.yellow,
+    backgroundColor: Colors.yellowLight,
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...(Platform.OS === 'web'
+      ? { boxShadow: '0px 8px 24px rgba(250,204,21,0.5)' }
+      : { ...Shadow.yellow }),
+  },
+  monkeyImage: {
+    width: 98,
+    height: 98,
+    borderRadius: 49,
+  },
+  shadow: {
+    width: 80,
+    height: 80,
+    backgroundColor: Colors.purple,
+    borderRadius: 40,
+    position: 'absolute',
+    bottom: -20,
+    zIndex: 1,
+    opacity: 0.2,
+    ...(Platform.OS === 'web' ? { filter: 'blur(10px)' } : {}),
+  },
 });

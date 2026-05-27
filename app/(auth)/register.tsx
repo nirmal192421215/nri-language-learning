@@ -1,12 +1,48 @@
-import { View, Text, TextInput, Pressable, StyleSheet, ActivityIndicator, Image } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, ActivityIndicator, Image, Platform, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../context/AuthContext';
 import { LinearGradient } from 'expo-linear-gradient';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInUp, useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { signInWithGoogleFirebase } from '../../utils/firebase';
+import { Colors, Fonts, Radius, Shadow } from '../../components/KidsTheme';
 
 const googleIconUri = `data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%234285F4' d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'/%3E%3Cpath fill='%2334A853' d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'/%3E%3Cpath fill='%23FBBC05' d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z'/%3E%3Cpath fill='%23EA4335' d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z'/%3E%3C/svg%3E`;
+
+function FunInput({ label, icon, ...props }: any) {
+  const [focused, setFocused] = useState(false);
+  return (
+    <View style={inputStyles.wrapper}>
+      <Text style={inputStyles.label}>{icon} {label}</Text>
+      <TextInput
+        style={[inputStyles.input, focused && inputStyles.inputFocused]}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        placeholderTextColor={Colors.textLight}
+        {...props}
+      />
+    </View>
+  );
+}
+
+const inputStyles = StyleSheet.create({
+  wrapper: { marginBottom: 16 },
+  label: { fontFamily: Fonts.body, fontSize: 14, color: Colors.textDark, marginBottom: 8 },
+  input: {
+    backgroundColor: Colors.bgMuted,
+    borderWidth: 2.5,
+    borderColor: '#E5E7EB',
+    borderRadius: Radius.md,
+    padding: 16,
+    fontSize: 16,
+    fontFamily: Fonts.bodyReg,
+    color: Colors.textDark,
+  },
+  inputFocused: {
+    borderColor: Colors.purple,
+    backgroundColor: Colors.purpleLight,
+  },
+});
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -16,11 +52,12 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const buttonScale = useSharedValue(1);
+  const buttonStyle = useAnimatedStyle(() => ({ transform: [{ scale: buttonScale.value }] }));
 
   const handleRegister = async () => {
     if (!name || !email || !password) return;
     setIsLoading(true);
-    // Simulate register then auto login
     await login(email);
     setIsLoading(false);
     router.replace('/language-selection');
@@ -31,10 +68,7 @@ export default function RegisterScreen() {
     try {
       const firebaseUser = await signInWithGoogleFirebase();
       if (firebaseUser && firebaseUser.email) {
-        const email = firebaseUser.email;
-        const nameToUse = firebaseUser.displayName || email.split('@')[0];
-        const userData = await loginWithGoogle(email, nameToUse);
-        
+        const userData = await loginWithGoogle(firebaseUser.email, firebaseUser.displayName || firebaseUser.email.split('@')[0]);
         if (userData && userData.xp > 0) {
           router.replace('/(tabs)');
         } else {
@@ -42,7 +76,6 @@ export default function RegisterScreen() {
         }
       }
     } catch (err: any) {
-      console.error('Firebase Google Auth error:', err);
       alert('Google Sign-up failed: ' + err.message);
     } finally {
       setIsGoogleLoading(false);
@@ -50,160 +83,108 @@ export default function RegisterScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <LinearGradient colors={['#A7F3D0', '#FFFDD0']} style={StyleSheet.absoluteFill} />
-      
-      <Animated.View entering={FadeInDown.duration(800).springify()} style={styles.content}>
-        <View style={styles.card}>
-          <Text style={styles.title}>Join Us</Text>
-          <Text style={styles.subtitle}>Create an account to start your journey</Text>
-          
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Full Name</Text>
-            <TextInput 
-              style={styles.input} 
-              placeholder="Your Name" 
-              value={name}
-              onChangeText={setName}
-            />
-          </View>
-          
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email Address</Text>
-            <TextInput 
-              style={styles.input} 
-              placeholder="you@example.com" 
-              value={email}
-              onChangeText={setEmail}
-              autoCapitalize="none"
-              keyboardType="email-address"
-            />
-          </View>
-          
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput 
-              style={styles.input} 
-              placeholder="••••••••" 
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </View>
+    <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+      <LinearGradient colors={['#EDE9FE', '#D1FAE5', '#FEF3C7']} style={StyleSheet.absoluteFill} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
 
-          <Pressable style={styles.button} onPress={handleRegister} disabled={isLoading || isGoogleLoading}>
-            {isLoading ? (
-              <ActivityIndicator color="white" />
-            ) : (
-              <Text style={styles.buttonText}>Sign Up</Text>
-            )}
-          </Pressable>
+      {/* Mascot greeting */}
+      <Animated.View entering={FadeInDown.delay(100).springify()} style={styles.mascotPeek}>
+        <View style={styles.mascotBubble}>
+          <Text style={styles.mascotBubbleText}>Your adventure awaits! 🌟</Text>
+        </View>
+        <Text style={styles.mascotEmoji}>🐒</Text>
+      </Animated.View>
 
-          <View style={styles.divider}>
-            <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>or</Text>
-            <View style={styles.dividerLine} />
-          </View>
+      <Animated.View entering={FadeInUp.delay(200).springify()} style={styles.card}>
+        <Text style={styles.title}>Join the Fun! 🎉</Text>
+        <Text style={styles.subtitle}>Create your learning account</Text>
 
-          <Pressable 
-            style={[styles.googleButton, (isLoading || isGoogleLoading) && styles.disabledButton]} 
-            onPress={handleGooglePress} 
+        <FunInput label="Your Name" icon="🧒" placeholder="What's your name?" value={name} onChangeText={setName} />
+        <FunInput label="Email Address" icon="📧" placeholder="you@example.com" value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
+        <FunInput label="Password" icon="🔒" placeholder="••••••••" value={password} onChangeText={setPassword} secureTextEntry />
+
+        <Animated.View style={buttonStyle}>
+          <Pressable
+            style={styles.registerBtn}
+            onPress={handleRegister}
+            onPressIn={() => { buttonScale.value = withSpring(0.94, { damping: 10 }); }}
+            onPressOut={() => { buttonScale.value = withSpring(1, { damping: 10 }); }}
             disabled={isLoading || isGoogleLoading}
           >
-            {isGoogleLoading ? (
-              <ActivityIndicator color="#5F6368" />
-            ) : (
-              <>
-                <Image source={{ uri: googleIconUri }} style={styles.googleIcon} />
-                <Text style={styles.googleButtonText}>Continue with Google</Text>
-              </>
-            )}
+            <LinearGradient colors={Colors.gradPurple} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.registerBtnGrad}>
+              {isLoading ? <ActivityIndicator color="white" /> : <Text style={styles.registerBtnText}>Create Account ✨</Text>}
+            </LinearGradient>
           </Pressable>
-          
-          <Pressable style={styles.linkButton} onPress={() => router.push('/(auth)/login')}>
-            <Text style={styles.linkText}>Already have an account? <Text style={styles.linkTextBold}>Log in</Text></Text>
-          </Pressable>
+        </Animated.View>
 
+        <View style={styles.divider}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.dividerText}>or</Text>
+          <View style={styles.dividerLine} />
         </View>
+
+        <Pressable style={[styles.googleBtn, (isLoading || isGoogleLoading) && { opacity: 0.6 }]} onPress={handleGooglePress} disabled={isLoading || isGoogleLoading}>
+          {isGoogleLoading ? <ActivityIndicator color={Colors.textMid} /> : (
+            <>
+              <Image source={{ uri: googleIconUri }} style={{ width: 22, height: 22, marginRight: 12 }} />
+              <Text style={styles.googleBtnText}>Continue with Google</Text>
+            </>
+          )}
+        </Pressable>
+
+        <Pressable style={styles.linkBtn} onPress={() => router.push('/(auth)/login')}>
+          <Text style={styles.linkText}>Already a member? <Text style={styles.linkBold}>Sign in 🚀</Text></Text>
+        </Pressable>
       </Animated.View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  content: { width: '100%', maxWidth: 400, padding: 20 },
-  card: {
-    backgroundColor: 'white',
-    borderRadius: 24,
-    padding: 30,
-    boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.05)',
-    elevation: 5,
-  },
-  title: { fontSize: 28, fontWeight: 'bold', color: '#065F46', marginBottom: 8, textAlign: 'center' },
-  subtitle: { fontSize: 16, color: '#4B5563', marginBottom: 30, textAlign: 'center' },
-  inputContainer: { marginBottom: 20 },
-  label: { fontSize: 14, fontWeight: '600', color: '#374151', marginBottom: 8 },
-  input: {
-    backgroundColor: '#F9FAFB',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: 12,
-    padding: 16,
-    fontSize: 16,
-  },
-  button: {
-    backgroundColor: '#10B981',
-    padding: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginTop: 10,
-    boxShadow: '0px 4px 10px rgba(16, 185, 129, 0.3)',
-    elevation: 5,
-  },
-  buttonText: { color: 'white', fontSize: 18, fontWeight: 'bold' },
-  linkButton: { marginTop: 20, alignItems: 'center' },
-  linkText: { color: '#4B5563', fontSize: 14 },
-  linkTextBold: { color: '#10B981', fontWeight: 'bold' },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#E5E7EB',
-  },
-  dividerText: {
-    color: '#9CA3AF',
-    paddingHorizontal: 10,
-    fontSize: 14,
-  },
-  googleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 40 },
+  mascotPeek: { alignItems: 'center', marginBottom: 10 },
+  mascotBubble: {
     backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#DADCE0',
-    padding: 16,
-    borderRadius: 12,
-    marginTop: 5,
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)',
-    elevation: 2,
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderWidth: 2.5,
+    borderColor: Colors.purple,
+    marginBottom: 8,
   },
-  disabledButton: {
-    opacity: 0.6,
+  mascotBubbleText: { fontFamily: Fonts.body, fontSize: 14, color: Colors.textDark },
+  mascotEmoji: { fontSize: 52 },
+  card: {
+    width: '100%',
+    maxWidth: 420,
+    backgroundColor: 'rgba(255,255,255,0.95)',
+    borderRadius: Radius.xl,
+    padding: 28,
+    borderWidth: 3,
+    borderColor: 'rgba(255,255,255,1)',
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 16px 48px rgba(0,0,0,0.1)' } : { ...Shadow.card }),
   },
-  googleIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 12,
+  title: { fontFamily: Fonts.heading, fontSize: 30, color: Colors.textDark, textAlign: 'center', marginBottom: 6 },
+  subtitle: { fontFamily: Fonts.bodyReg, fontSize: 15, color: Colors.textMid, textAlign: 'center', marginBottom: 24 },
+  registerBtn: {
+    borderRadius: Radius.pill,
+    marginTop: 4,
+    marginBottom: 4,
+    overflow: 'hidden',
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 6px 20px rgba(168,85,247,0.4)' } : { ...Shadow.purple }),
   },
-  googleButtonText: {
-    color: '#3C4043',
-    fontSize: 16,
-    fontWeight: '600',
-  }
+  registerBtnGrad: { paddingVertical: 16, alignItems: 'center', borderRadius: Radius.pill },
+  registerBtnText: { fontFamily: Fonts.heading, fontSize: 18, color: '#FFFFFF' },
+  divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 18 },
+  dividerLine: { flex: 1, height: 1.5, backgroundColor: '#E5E7EB' },
+  dividerText: { fontFamily: Fonts.bodyReg, color: Colors.textLight, paddingHorizontal: 12, fontSize: 14 },
+  googleBtn: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+    backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: '#E5E7EB',
+    padding: 14, borderRadius: Radius.md,
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 2px 8px rgba(0,0,0,0.06)' } : { ...Shadow.soft }),
+  },
+  googleBtnText: { fontFamily: Fonts.bodySemi, color: Colors.textMid, fontSize: 16 },
+  linkBtn: { marginTop: 20, alignItems: 'center' },
+  linkText: { fontFamily: Fonts.bodyReg, color: Colors.textMid, fontSize: 14 },
+  linkBold: { fontFamily: Fonts.body, color: Colors.purple },
 });

@@ -3,6 +3,8 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
+    "@expo-google-fonts/fredoka-one": "^0.2.3",
+    "@expo-google-fonts/nunito": "^0.4.2",
     "@expo/metro-runtime": "~56.0.11",
     "@google/generative-ai": "^0.24.1",
     "@react-native-async-storage/async-storage": "^3.1.0",
