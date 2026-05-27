@@ -29,7 +29,9 @@ const userSchema = new mongoose.Schema({
   lastLoginDate: { type: Date, default: Date.now },
   level: { type: String, default: "Beginner - Level 1" },
   levelProgress: { type: Number, default: 0 },
-  learningLanguage: { type: String, default: "tamil" }
+  learningLanguage: { type: String, default: "tamil" },
+  unlockedCountries: { type: [String], default: ['india'] },
+  currentCountry: { type: String, default: 'india' }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -128,6 +130,21 @@ app.post('/api/update-language', async (req, res) => {
     const user = await User.findOneAndUpdate(
       { email },
       { learningLanguage },
+      { new: true }
+    );
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// API: Update Country Progress
+app.post('/api/update-country', async (req, res) => {
+  try {
+    const { email, unlockedCountries, currentCountry } = req.body;
+    const user = await User.findOneAndUpdate(
+      { email },
+      { unlockedCountries, currentCountry },
       { new: true }
     );
     res.json(user);

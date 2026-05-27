@@ -197,3 +197,48 @@ export async function generateFlashcardLesson(skill: string, level: string, lang
     throw error;
   }
 }
+
+export type StoryNode = {
+  narratorText: string;
+  npcDialogue: string; // in native language
+  npcTranslation: string; // english hint
+  options: {
+    text: string; // native language
+    translation: string; // english hint
+    isCorrect: boolean;
+  }[];
+};
+
+export async function generateStoryMission(country: string, language: string): Promise<StoryNode[]> {
+  if (!hasApiKey()) throw new Error('API Key is missing');
+
+  const model = genAI.getGenerativeModel({ 
+    model: 'gemini-flash-lite-latest',
+    generationConfig: { responseMimeType: "application/json" }
+  });
+
+  const prompt = `You are an interactive storyteller and language teacher. The user is traveling to ${country} and learning ${language}.
+  Create an immersive, 3-part cultural story mission. 
+  For example, if India, maybe a Temple Visit or Family Dinner. If USA, an Indian cultural event.
+  
+  For each of the 3 parts (nodes) of the story:
+  1. 'narratorText': A short English description of what is happening (e.g., "You walk into the bustling temple. The priest approaches you...").
+  2. 'npcDialogue': A character speaks a short phrase in ${language} (native script).
+  3. 'npcTranslation': English translation of what they said.
+  4. 'options': Provide 3 dialogue options for the user to reply.
+     - 'text': The option in ${language} (native script).
+     - 'translation': English translation of this option.
+     - 'isCorrect': Only ONE option should be true. It must make contextual sense.
+  
+  Output JSON array of EXACTLY 3 objects with the keys: narratorText, npcDialogue, npcTranslation, options.`;
+
+  try {
+    const result = await model.generateContent(prompt);
+    const text = result.response.text().replace(/```json/g, '').replace(/```/g, '').trim();
+    return JSON.parse(text) as StoryNode[];
+  } catch (error) {
+    console.error("Error generating story mission:", error);
+    throw error;
+  }
+}
+

@@ -28,6 +28,8 @@ type UserData = {
   levelProgress: number;
   learningLanguage: string;
   completedModules: string[]; // tracks completed pillars at current tier e.g. ['foundations','communication']
+  unlockedCountries: string[];
+  currentCountry: string;
 };
 
 type AuthContextType = {
@@ -41,6 +43,7 @@ type AuthContextType = {
   setLearningLanguage: (langId: string) => Promise<void>;
   loginWithGoogle: (email: string, name?: string) => Promise<UserData | null>;
   completeModule: (moduleId: string) => Promise<{ leveledUp: boolean; newTier: string } | null>;
+  setWorldProgress: (unlockedCountries: string[], currentCountry: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -56,10 +59,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const localXpStr = await AsyncStorage.getItem('localXp');
       const localLevel = await AsyncStorage.getItem('localLevel');
       const localCompletedStr = await AsyncStorage.getItem('localCompletedModules');
+      const localUnlockedCountries = await AsyncStorage.getItem('unlockedCountries');
+      const localCurrentCountry = await AsyncStorage.getItem('currentCountry');
       
       const savedXp = localXpStr ? parseInt(localXpStr, 10) : 25400;
       const savedLevel = localLevel || 'Pro - Level 5';
       const savedCompleted = localCompletedStr ? JSON.parse(localCompletedStr) : [];
+      const savedUnlockedCountries = localUnlockedCountries ? JSON.parse(localUnlockedCountries) : ['india'];
+      const savedCurrentCountry = localCurrentCountry || 'india';
 
       if (email) {
         try {
@@ -70,13 +77,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           });
           const data = await res.json();
           if (data && data.error) {
-            setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted });
+            setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry });
           } else {
-            setUser({ ...data, learningLanguage: data.learningLanguage || lang, completedModules: data.completedModules || [] });
+            setUser({ ...data, learningLanguage: data.learningLanguage || lang, completedModules: data.completedModules || [], unlockedCountries: data.unlockedCountries || savedUnlockedCountries, currentCountry: data.currentCountry || savedCurrentCountry });
           }
         } catch (e) {
           console.warn('MongoDB load error (falling back to offline mode):', e);
-          setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted });
+          setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry });
         }
       }
       setIsLoading(false);
@@ -99,18 +106,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const localXpStr = await AsyncStorage.getItem('localXp');
       const localLevel = await AsyncStorage.getItem('localLevel');
       const localCompletedStr = await AsyncStorage.getItem('localCompletedModules');
+      const localUnlockedCountries = await AsyncStorage.getItem('unlockedCountries');
+      const localCurrentCountry = await AsyncStorage.getItem('currentCountry');
       
       const savedXp = localXpStr ? parseInt(localXpStr, 10) : 25400;
       const savedLevel = localLevel || 'Pro - Level 5';
       const savedCompleted = localCompletedStr ? JSON.parse(localCompletedStr) : [];
+      const savedUnlockedCountries = localUnlockedCountries ? JSON.parse(localUnlockedCountries) : ['india'];
+      const savedCurrentCountry = localCurrentCountry || 'india';
 
       if (data && data.error) {
-        const mockUser = { id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted };
+        const mockUser = { id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry };
         setUser(mockUser);
         setIsLoading(false);
         return mockUser as any;
       } else {
-        const fullUser = { ...data, learningLanguage: data.learningLanguage || lang };
+        const fullUser = { ...data, learningLanguage: data.learningLanguage || lang, unlockedCountries: data.unlockedCountries || savedUnlockedCountries, currentCountry: data.currentCountry || savedCurrentCountry };
         setUser(fullUser);
         setIsLoading(false);
         return fullUser;
@@ -121,12 +132,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const localXpStr = await AsyncStorage.getItem('localXp');
       const localLevel = await AsyncStorage.getItem('localLevel');
       const localCompletedStr = await AsyncStorage.getItem('localCompletedModules');
+      const localUnlockedCountries = await AsyncStorage.getItem('unlockedCountries');
+      const localCurrentCountry = await AsyncStorage.getItem('currentCountry');
       
       const savedXp = localXpStr ? parseInt(localXpStr, 10) : 25400;
       const savedLevel = localLevel || 'Pro - Level 5';
       const savedCompleted = localCompletedStr ? JSON.parse(localCompletedStr) : [];
+      const savedUnlockedCountries = localUnlockedCountries ? JSON.parse(localUnlockedCountries) : ['india'];
+      const savedCurrentCountry = localCurrentCountry || 'india';
       
-      const mockUser = { id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted };
+      const mockUser = { id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry };
       setUser(mockUser);
       setIsLoading(false);
       return mockUser as any;
@@ -207,6 +222,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await AsyncStorage.removeItem('localXp');
     await AsyncStorage.removeItem('localLevel');
     await AsyncStorage.removeItem('localCompletedModules');
+    await AsyncStorage.removeItem('unlockedCountries');
+    await AsyncStorage.removeItem('currentCountry');
     setUser(null);
   };
 
@@ -349,8 +366,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const setWorldProgress = async (unlockedCountries: string[], currentCountry: string) => {
+    if (!user) return;
+    await AsyncStorage.setItem('unlockedCountries', JSON.stringify(unlockedCountries));
+    await AsyncStorage.setItem('currentCountry', currentCountry);
+    setUser({ ...user, unlockedCountries, currentCountry });
+
+    try {
+      await fetch(`${API_URL}/update-country`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: user.email, unlockedCountries, currentCountry })
+      });
+    } catch (e) {
+      console.warn('MongoDB update-country error:', e);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, updateProgress, setAssessmentLevel, updateProfile, setLearningLanguage, loginWithGoogle, completeModule }}>
+    <AuthContext.Provider value={{ user, isLoading, login, logout, updateProgress, setAssessmentLevel, updateProfile, setLearningLanguage, loginWithGoogle, completeModule, setWorldProgress }}>
       {children}
     </AuthContext.Provider>
   );
