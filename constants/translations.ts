@@ -1344,3 +1344,2150 @@ export const PRONOUNCE_PRO_POOLS: Record<string, Array<{ phrase: string, english
     { phrase: 'ದೇವರ ಮೇಲೆ ನಂಬಿಕೆ ಶಕ್ತಿ', english: 'Faith in God is strength' },
   ],
 };
+
+// --- Auto-Appended Languages ---
+UI_TRANSLATIONS['spanish'] = {
+  "learn": "Aprender",
+  "games": "Juegos",
+  "community": "Comunidad",
+  "leaderboard": "Clasificación",
+  "culture": "Cultura",
+  "profile": "Perfil",
+  "communityMockMessage": "¡Emocionado de aprender español aquí!"
+};
+SPEECH_CODES['spanish'] = 'es-ES';
+GREETINGS['spanish'] = 'Hola';
+PRONOUNCE_GAME_POOLS['spanish'] = [
+  {
+    "phrase": "Hola",
+    "english": "Hello"
+  },
+  {
+    "phrase": "Gracias",
+    "english": "Thank you"
+  },
+  {
+    "phrase": "Sí",
+    "english": "Yes"
+  },
+  {
+    "phrase": "No",
+    "english": "No"
+  },
+  {
+    "phrase": "Por favor",
+    "english": "Please"
+  },
+  {
+    "phrase": "Agua",
+    "english": "Water"
+  },
+  {
+    "phrase": "Comida",
+    "english": "Food"
+  },
+  {
+    "phrase": "Casa",
+    "english": "House"
+  },
+  {
+    "phrase": "Libro",
+    "english": "Book"
+  },
+  {
+    "phrase": "Escuela",
+    "english": "School"
+  },
+  {
+    "phrase": "Amigo",
+    "english": "Friend"
+  },
+  {
+    "phrase": "Familia",
+    "english": "Family"
+  },
+  {
+    "phrase": "Madre",
+    "english": "Mother"
+  },
+  {
+    "phrase": "Padre",
+    "english": "Father"
+  },
+  {
+    "phrase": "Amor",
+    "english": "Love"
+  },
+  {
+    "phrase": "Tiempo",
+    "english": "Time"
+  },
+  {
+    "phrase": "Día",
+    "english": "Day"
+  },
+  {
+    "phrase": "Noche",
+    "english": "Night"
+  },
+  {
+    "phrase": "Hoy",
+    "english": "Today"
+  },
+  {
+    "phrase": "Mañana",
+    "english": "Tomorrow"
+  },
+  {
+    "phrase": "Ayer",
+    "english": "Yesterday"
+  },
+  {
+    "phrase": "Sol",
+    "english": "Sun"
+  },
+  {
+    "phrase": "Luna",
+    "english": "Moon"
+  },
+  {
+    "phrase": "Árbol",
+    "english": "Tree"
+  },
+  {
+    "phrase": "Flor",
+    "english": "Flower"
+  },
+  {
+    "phrase": "Gato",
+    "english": "Cat"
+  },
+  {
+    "phrase": "Perro",
+    "english": "Dog"
+  },
+  {
+    "phrase": "Pájaro",
+    "english": "Bird"
+  },
+  {
+    "phrase": "Camino",
+    "english": "Road"
+  },
+  {
+    "phrase": "Coche",
+    "english": "Car"
+  },
+  {
+    "phrase": "Tren",
+    "english": "Train"
+  },
+  {
+    "phrase": "Dinero",
+    "english": "Money"
+  },
+  {
+    "phrase": "Trabajo",
+    "english": "Work"
+  },
+  {
+    "phrase": "Ayuda",
+    "english": "Help"
+  },
+  {
+    "phrase": "Alto",
+    "english": "Stop"
+  },
+  {
+    "phrase": "Ir",
+    "english": "Go"
+  },
+  {
+    "phrase": "Venir",
+    "english": "Come"
+  },
+  {
+    "phrase": "Comer",
+    "english": "Eat"
+  },
+  {
+    "phrase": "Beber",
+    "english": "Drink"
+  },
+  {
+    "phrase": "Dormir",
+    "english": "Sleep"
+  },
+  {
+    "phrase": "Leer",
+    "english": "Read"
+  },
+  {
+    "phrase": "Escribir",
+    "english": "Write"
+  },
+  {
+    "phrase": "Hablar",
+    "english": "Speak"
+  },
+  {
+    "phrase": "Escuchar",
+    "english": "Listen"
+  },
+  {
+    "phrase": "Mirar",
+    "english": "Look"
+  },
+  {
+    "phrase": "Feliz",
+    "english": "Happy"
+  },
+  {
+    "phrase": "Triste",
+    "english": "Sad"
+  },
+  {
+    "phrase": "Bueno",
+    "english": "Good"
+  },
+  {
+    "phrase": "Malo",
+    "english": "Bad"
+  },
+  {
+    "phrase": "Grande",
+    "english": "Big"
+  }
+];
+QUIZ_POOLS['spanish'] = [
+  {
+    "target": "Hola",
+    "options": [
+      "Hello",
+      "Night",
+      "Today",
+      "Love"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Gracias",
+    "options": [
+      "Good",
+      "Thank you",
+      "Come",
+      "Book"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Sí",
+    "options": [
+      "Water",
+      "Good",
+      "Yes",
+      "Train"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "No",
+    "options": [
+      "Happy",
+      "Yesterday",
+      "No",
+      "Car"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Por favor",
+    "options": [
+      "Speak",
+      "Night",
+      "Happy",
+      "Please"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Agua",
+    "options": [
+      "Water",
+      "Speak",
+      "Read",
+      "Book"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Comida",
+    "options": [
+      "Day",
+      "Food",
+      "Car",
+      "Friend"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Casa",
+    "options": [
+      "House",
+      "Flower",
+      "Water",
+      "Tree"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Libro",
+    "options": [
+      "Book",
+      "Look",
+      "Tomorrow",
+      "Night"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Escuela",
+    "options": [
+      "Flower",
+      "Cat",
+      "School",
+      "Happy"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Amigo",
+    "options": [
+      "Friend",
+      "House",
+      "Bad",
+      "Write"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Familia",
+    "options": [
+      "Family",
+      "Tree",
+      "Go",
+      "Yesterday"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Madre",
+    "options": [
+      "Day",
+      "Car",
+      "Money",
+      "Mother"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Padre",
+    "options": [
+      "Father",
+      "Time",
+      "Moon",
+      "Sun"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Amor",
+    "options": [
+      "Love",
+      "Flower",
+      "Yes",
+      "Drink"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Tiempo",
+    "options": [
+      "Sun",
+      "Come",
+      "Bird",
+      "Time"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Día",
+    "options": [
+      "Speak",
+      "School",
+      "Day",
+      "Happy"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Noche",
+    "options": [
+      "Go",
+      "Night",
+      "School",
+      "Car"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Hoy",
+    "options": [
+      "Water",
+      "Book",
+      "Mother",
+      "Today"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Mañana",
+    "options": [
+      "Look",
+      "Tomorrow",
+      "Bad",
+      "Sad"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Ayer",
+    "options": [
+      "Night",
+      "Go",
+      "Yesterday",
+      "Tomorrow"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Sol",
+    "options": [
+      "Eat",
+      "No",
+      "Sun",
+      "Read"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Luna",
+    "options": [
+      "Water",
+      "Moon",
+      "Tomorrow",
+      "Mother"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Árbol",
+    "options": [
+      "Thank you",
+      "Write",
+      "Tree",
+      "Stop"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Flor",
+    "options": [
+      "Bad",
+      "House",
+      "Flower",
+      "Hello"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Gato",
+    "options": [
+      "Tomorrow",
+      "Come",
+      "Cat",
+      "Friend"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Perro",
+    "options": [
+      "No",
+      "Dog",
+      "Come",
+      "Mother"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Pájaro",
+    "options": [
+      "Cat",
+      "Work",
+      "Bird",
+      "Train"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Camino",
+    "options": [
+      "Moon",
+      "Father",
+      "Road",
+      "Hello"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Coche",
+    "options": [
+      "Car",
+      "Stop",
+      "Family",
+      "Food"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Tren",
+    "options": [
+      "Train",
+      "Book",
+      "Dog",
+      "Love"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Dinero",
+    "options": [
+      "Come",
+      "Car",
+      "Drink",
+      "Money"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Trabajo",
+    "options": [
+      "Work",
+      "Good",
+      "Thank you",
+      "Read"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Ayuda",
+    "options": [
+      "Flower",
+      "Food",
+      "Help",
+      "Bird"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Alto",
+    "options": [
+      "Stop",
+      "Night",
+      "Drink",
+      "Please"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Ir",
+    "options": [
+      "Go",
+      "Sun",
+      "Car",
+      "Good"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Venir",
+    "options": [
+      "Come",
+      "No",
+      "Time",
+      "Money"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Comer",
+    "options": [
+      "Eat",
+      "Mother",
+      "No",
+      "Come"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Beber",
+    "options": [
+      "Friend",
+      "Drink",
+      "Food",
+      "Train"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Dormir",
+    "options": [
+      "School",
+      "Hello",
+      "Train",
+      "Sleep"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Leer",
+    "options": [
+      "Eat",
+      "Read",
+      "Write",
+      "Money"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Escribir",
+    "options": [
+      "Write",
+      "Hello",
+      "Listen",
+      "Moon"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Hablar",
+    "options": [
+      "Dog",
+      "Work",
+      "Speak",
+      "Come"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Escuchar",
+    "options": [
+      "Hello",
+      "Car",
+      "Listen",
+      "Friend"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Mirar",
+    "options": [
+      "Speak",
+      "Help",
+      "Sun",
+      "Look"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Feliz",
+    "options": [
+      "Moon",
+      "Help",
+      "Happy",
+      "Sad"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Triste",
+    "options": [
+      "Sad",
+      "Family",
+      "Cat",
+      "Tree"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Bueno",
+    "options": [
+      "Good",
+      "Sad",
+      "Work",
+      "Come"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Malo",
+    "options": [
+      "Listen",
+      "Bad",
+      "Love",
+      "Stop"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Grande",
+    "options": [
+      "Big",
+      "No",
+      "Book",
+      "Go"
+    ],
+    "correct": 0
+  }
+];
+UI_TRANSLATIONS['french'] = {
+  "learn": "Apprendre",
+  "games": "Jeux",
+  "community": "Communauté",
+  "leaderboard": "Classement",
+  "culture": "Culture",
+  "profile": "Profil",
+  "communityMockMessage": "Ravi d'apprendre le français ici!"
+};
+SPEECH_CODES['french'] = 'fr-FR';
+GREETINGS['french'] = 'Bonjour';
+PRONOUNCE_GAME_POOLS['french'] = [
+  {
+    "phrase": "Bonjour",
+    "english": "Hello"
+  },
+  {
+    "phrase": "Merci",
+    "english": "Thank you"
+  },
+  {
+    "phrase": "Oui",
+    "english": "Yes"
+  },
+  {
+    "phrase": "Non",
+    "english": "No"
+  },
+  {
+    "phrase": "S'il vous plaît",
+    "english": "Please"
+  },
+  {
+    "phrase": "Eau",
+    "english": "Water"
+  },
+  {
+    "phrase": "Nourriture",
+    "english": "Food"
+  },
+  {
+    "phrase": "Maison",
+    "english": "House"
+  },
+  {
+    "phrase": "Livre",
+    "english": "Book"
+  },
+  {
+    "phrase": "École",
+    "english": "School"
+  },
+  {
+    "phrase": "Ami",
+    "english": "Friend"
+  },
+  {
+    "phrase": "Famille",
+    "english": "Family"
+  },
+  {
+    "phrase": "Mère",
+    "english": "Mother"
+  },
+  {
+    "phrase": "Père",
+    "english": "Father"
+  },
+  {
+    "phrase": "Amour",
+    "english": "Love"
+  },
+  {
+    "phrase": "Temps",
+    "english": "Time"
+  },
+  {
+    "phrase": "Jour",
+    "english": "Day"
+  },
+  {
+    "phrase": "Nuit",
+    "english": "Night"
+  },
+  {
+    "phrase": "Aujourd'hui",
+    "english": "Today"
+  },
+  {
+    "phrase": "Demain",
+    "english": "Tomorrow"
+  },
+  {
+    "phrase": "Hier",
+    "english": "Yesterday"
+  },
+  {
+    "phrase": "Soleil",
+    "english": "Sun"
+  },
+  {
+    "phrase": "Lune",
+    "english": "Moon"
+  },
+  {
+    "phrase": "Arbre",
+    "english": "Tree"
+  },
+  {
+    "phrase": "Fleur",
+    "english": "Flower"
+  },
+  {
+    "phrase": "Chat",
+    "english": "Cat"
+  },
+  {
+    "phrase": "Chien",
+    "english": "Dog"
+  },
+  {
+    "phrase": "Oiseau",
+    "english": "Bird"
+  },
+  {
+    "phrase": "Route",
+    "english": "Road"
+  },
+  {
+    "phrase": "Voiture",
+    "english": "Car"
+  },
+  {
+    "phrase": "Train",
+    "english": "Train"
+  },
+  {
+    "phrase": "Argent",
+    "english": "Money"
+  },
+  {
+    "phrase": "Travail",
+    "english": "Work"
+  },
+  {
+    "phrase": "Aide",
+    "english": "Help"
+  },
+  {
+    "phrase": "Arrêt",
+    "english": "Stop"
+  },
+  {
+    "phrase": "Aller",
+    "english": "Go"
+  },
+  {
+    "phrase": "Venir",
+    "english": "Come"
+  },
+  {
+    "phrase": "Manger",
+    "english": "Eat"
+  },
+  {
+    "phrase": "Boire",
+    "english": "Drink"
+  },
+  {
+    "phrase": "Dormir",
+    "english": "Sleep"
+  },
+  {
+    "phrase": "Lire",
+    "english": "Read"
+  },
+  {
+    "phrase": "Écrire",
+    "english": "Write"
+  },
+  {
+    "phrase": "Parler",
+    "english": "Speak"
+  },
+  {
+    "phrase": "Écouter",
+    "english": "Listen"
+  },
+  {
+    "phrase": "Regarder",
+    "english": "Look"
+  },
+  {
+    "phrase": "Heureux",
+    "english": "Happy"
+  },
+  {
+    "phrase": "Triste",
+    "english": "Sad"
+  },
+  {
+    "phrase": "Bon",
+    "english": "Good"
+  },
+  {
+    "phrase": "Mauvais",
+    "english": "Bad"
+  },
+  {
+    "phrase": "Grand",
+    "english": "Big"
+  }
+];
+QUIZ_POOLS['french'] = [
+  {
+    "target": "Bonjour",
+    "options": [
+      "Sad",
+      "Hello",
+      "Please",
+      "Moon"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Merci",
+    "options": [
+      "Road",
+      "Today",
+      "Listen",
+      "Thank you"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Oui",
+    "options": [
+      "Cat",
+      "Yes",
+      "Today",
+      "Day"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Non",
+    "options": [
+      "Today",
+      "Sun",
+      "No",
+      "Big"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "S'il vous plaît",
+    "options": [
+      "Please",
+      "Car",
+      "Bird",
+      "Today"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Eau",
+    "options": [
+      "Yesterday",
+      "Happy",
+      "Bad",
+      "Water"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Nourriture",
+    "options": [
+      "Food",
+      "Look",
+      "Moon",
+      "Read"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Maison",
+    "options": [
+      "House",
+      "Please",
+      "Good",
+      "Love"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Livre",
+    "options": [
+      "Look",
+      "Big",
+      "Write",
+      "Book"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "École",
+    "options": [
+      "Road",
+      "Read",
+      "Please",
+      "School"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Ami",
+    "options": [
+      "Listen",
+      "Friend",
+      "Work",
+      "Thank you"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Famille",
+    "options": [
+      "Food",
+      "Thank you",
+      "Car",
+      "Family"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Mère",
+    "options": [
+      "Drink",
+      "Friend",
+      "No",
+      "Mother"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Père",
+    "options": [
+      "Father",
+      "Flower",
+      "Drink",
+      "Sun"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Amour",
+    "options": [
+      "Come",
+      "Big",
+      "Love",
+      "Book"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Temps",
+    "options": [
+      "School",
+      "Time",
+      "Big",
+      "Mother"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Jour",
+    "options": [
+      "Day",
+      "Big",
+      "Road",
+      "Listen"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Nuit",
+    "options": [
+      "Night",
+      "Road",
+      "Drink",
+      "Big"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Aujourd'hui",
+    "options": [
+      "Today",
+      "Love",
+      "Yes",
+      "Bird"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Demain",
+    "options": [
+      "Bad",
+      "Tomorrow",
+      "Hello",
+      "Look"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Hier",
+    "options": [
+      "Mother",
+      "Yesterday",
+      "Write",
+      "Big"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Soleil",
+    "options": [
+      "Sun",
+      "Dog",
+      "Write",
+      "Moon"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Lune",
+    "options": [
+      "Tomorrow",
+      "Yes",
+      "Sad",
+      "Moon"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Arbre",
+    "options": [
+      "Road",
+      "Happy",
+      "Tree",
+      "Food"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Fleur",
+    "options": [
+      "Flower",
+      "Speak",
+      "Hello",
+      "Go"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Chat",
+    "options": [
+      "Love",
+      "Cat",
+      "Write",
+      "Big"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Chien",
+    "options": [
+      "Dog",
+      "Day",
+      "Yesterday",
+      "Family"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Oiseau",
+    "options": [
+      "Tree",
+      "Help",
+      "Bird",
+      "Father"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Route",
+    "options": [
+      "Road",
+      "Yes",
+      "Look",
+      "Friend"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Voiture",
+    "options": [
+      "Car",
+      "Food",
+      "Tomorrow",
+      "Night"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Train",
+    "options": [
+      "Money",
+      "House",
+      "Train",
+      "Moon"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Argent",
+    "options": [
+      "Money",
+      "Please",
+      "Good",
+      "Sad"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Travail",
+    "options": [
+      "Food",
+      "Work",
+      "School",
+      "Tree"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Aide",
+    "options": [
+      "House",
+      "Mother",
+      "Help",
+      "Money"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Arrêt",
+    "options": [
+      "Stop",
+      "Sad",
+      "Sleep",
+      "Moon"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Aller",
+    "options": [
+      "Tree",
+      "Go",
+      "Train",
+      "Bad"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Venir",
+    "options": [
+      "Come",
+      "Mother",
+      "Look",
+      "Love"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Manger",
+    "options": [
+      "Water",
+      "Eat",
+      "Good",
+      "Father"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Boire",
+    "options": [
+      "Sad",
+      "Drink",
+      "Listen",
+      "Big"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Dormir",
+    "options": [
+      "Sleep",
+      "Sad",
+      "Family",
+      "Good"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Lire",
+    "options": [
+      "Family",
+      "Read",
+      "Eat",
+      "Tree"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Écrire",
+    "options": [
+      "Write",
+      "Love",
+      "Road",
+      "Friend"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Parler",
+    "options": [
+      "Speak",
+      "Read",
+      "Hello",
+      "Train"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Écouter",
+    "options": [
+      "Look",
+      "Time",
+      "Dog",
+      "Listen"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Regarder",
+    "options": [
+      "Father",
+      "Look",
+      "Sun",
+      "Write"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Heureux",
+    "options": [
+      "Happy",
+      "No",
+      "Help",
+      "Sleep"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Triste",
+    "options": [
+      "Cat",
+      "Sad",
+      "Road",
+      "House"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Bon",
+    "options": [
+      "Good",
+      "Go",
+      "Yesterday",
+      "Road"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Mauvais",
+    "options": [
+      "Bad",
+      "Hello",
+      "Go",
+      "Come"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Grand",
+    "options": [
+      "Dog",
+      "Go",
+      "No",
+      "Big"
+    ],
+    "correct": 3
+  }
+];
+UI_TRANSLATIONS['german'] = {
+  "learn": "Lernen",
+  "games": "Spiele",
+  "community": "Gemeinschaft",
+  "leaderboard": "Bestenliste",
+  "culture": "Kultur",
+  "profile": "Profil",
+  "communityMockMessage": "Ich freue mich darauf, hier Deutsch zu lernen!"
+};
+SPEECH_CODES['german'] = 'de-DE';
+GREETINGS['german'] = 'Hallo';
+PRONOUNCE_GAME_POOLS['german'] = [
+  {
+    "phrase": "Hallo",
+    "english": "Hello"
+  },
+  {
+    "phrase": "Danke",
+    "english": "Thank you"
+  },
+  {
+    "phrase": "Ja",
+    "english": "Yes"
+  },
+  {
+    "phrase": "Nein",
+    "english": "No"
+  },
+  {
+    "phrase": "Bitte",
+    "english": "Please"
+  },
+  {
+    "phrase": "Wasser",
+    "english": "Water"
+  },
+  {
+    "phrase": "Essen",
+    "english": "Food"
+  },
+  {
+    "phrase": "Haus",
+    "english": "House"
+  },
+  {
+    "phrase": "Buch",
+    "english": "Book"
+  },
+  {
+    "phrase": "Schule",
+    "english": "School"
+  },
+  {
+    "phrase": "Freund",
+    "english": "Friend"
+  },
+  {
+    "phrase": "Familie",
+    "english": "Family"
+  },
+  {
+    "phrase": "Mutter",
+    "english": "Mother"
+  },
+  {
+    "phrase": "Vater",
+    "english": "Father"
+  },
+  {
+    "phrase": "Liebe",
+    "english": "Love"
+  },
+  {
+    "phrase": "Zeit",
+    "english": "Time"
+  },
+  {
+    "phrase": "Tag",
+    "english": "Day"
+  },
+  {
+    "phrase": "Nacht",
+    "english": "Night"
+  },
+  {
+    "phrase": "Heute",
+    "english": "Today"
+  },
+  {
+    "phrase": "Morgen",
+    "english": "Tomorrow"
+  },
+  {
+    "phrase": "Gestern",
+    "english": "Yesterday"
+  },
+  {
+    "phrase": "Sonne",
+    "english": "Sun"
+  },
+  {
+    "phrase": "Mond",
+    "english": "Moon"
+  },
+  {
+    "phrase": "Baum",
+    "english": "Tree"
+  },
+  {
+    "phrase": "Blume",
+    "english": "Flower"
+  },
+  {
+    "phrase": "Katze",
+    "english": "Cat"
+  },
+  {
+    "phrase": "Hund",
+    "english": "Dog"
+  },
+  {
+    "phrase": "Vogel",
+    "english": "Bird"
+  },
+  {
+    "phrase": "Straße",
+    "english": "Road"
+  },
+  {
+    "phrase": "Auto",
+    "english": "Car"
+  },
+  {
+    "phrase": "Zug",
+    "english": "Train"
+  },
+  {
+    "phrase": "Geld",
+    "english": "Money"
+  },
+  {
+    "phrase": "Arbeit",
+    "english": "Work"
+  },
+  {
+    "phrase": "Hilfe",
+    "english": "Help"
+  },
+  {
+    "phrase": "Stopp",
+    "english": "Stop"
+  },
+  {
+    "phrase": "Gehen",
+    "english": "Go"
+  },
+  {
+    "phrase": "Kommen",
+    "english": "Come"
+  },
+  {
+    "phrase": "Essen",
+    "english": "Eat"
+  },
+  {
+    "phrase": "Trinken",
+    "english": "Drink"
+  },
+  {
+    "phrase": "Schlafen",
+    "english": "Sleep"
+  },
+  {
+    "phrase": "Lesen",
+    "english": "Read"
+  },
+  {
+    "phrase": "Schreiben",
+    "english": "Write"
+  },
+  {
+    "phrase": "Sprechen",
+    "english": "Speak"
+  },
+  {
+    "phrase": "Hören",
+    "english": "Listen"
+  },
+  {
+    "phrase": "Schauen",
+    "english": "Look"
+  },
+  {
+    "phrase": "Glücklich",
+    "english": "Happy"
+  },
+  {
+    "phrase": "Traurig",
+    "english": "Sad"
+  },
+  {
+    "phrase": "Gut",
+    "english": "Good"
+  },
+  {
+    "phrase": "Schlecht",
+    "english": "Bad"
+  },
+  {
+    "phrase": "Groß",
+    "english": "Big"
+  }
+];
+QUIZ_POOLS['german'] = [
+  {
+    "target": "Hallo",
+    "options": [
+      "Moon",
+      "Water",
+      "Thank you",
+      "Hello"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Danke",
+    "options": [
+      "Thank you",
+      "Food",
+      "Book",
+      "Write"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Ja",
+    "options": [
+      "Speak",
+      "Car",
+      "Listen",
+      "Yes"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Nein",
+    "options": [
+      "Cat",
+      "Good",
+      "Mother",
+      "No"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Bitte",
+    "options": [
+      "Eat",
+      "Book",
+      "Read",
+      "Please"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Wasser",
+    "options": [
+      "Night",
+      "Water",
+      "Flower",
+      "Today"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Essen",
+    "options": [
+      "Tree",
+      "Friend",
+      "Help",
+      "Food"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Haus",
+    "options": [
+      "Car",
+      "Listen",
+      "House",
+      "Work"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Buch",
+    "options": [
+      "Moon",
+      "Food",
+      "Dog",
+      "Book"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Schule",
+    "options": [
+      "Thank you",
+      "Dog",
+      "School",
+      "Drink"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Freund",
+    "options": [
+      "Dog",
+      "Bad",
+      "Friend",
+      "Look"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Familie",
+    "options": [
+      "House",
+      "Father",
+      "Day",
+      "Family"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Mutter",
+    "options": [
+      "Tomorrow",
+      "Moon",
+      "Car",
+      "Mother"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Vater",
+    "options": [
+      "Stop",
+      "Dog",
+      "Bad",
+      "Father"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Liebe",
+    "options": [
+      "Listen",
+      "Read",
+      "Family",
+      "Love"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Zeit",
+    "options": [
+      "Look",
+      "Thank you",
+      "Big",
+      "Time"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Tag",
+    "options": [
+      "Road",
+      "Yesterday",
+      "Read",
+      "Day"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Nacht",
+    "options": [
+      "Flower",
+      "Mother",
+      "Night",
+      "Day"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Heute",
+    "options": [
+      "Big",
+      "Moon",
+      "Night",
+      "Today"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Morgen",
+    "options": [
+      "Look",
+      "Moon",
+      "Sun",
+      "Tomorrow"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Gestern",
+    "options": [
+      "Yesterday",
+      "Friend",
+      "Listen",
+      "Money"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Sonne",
+    "options": [
+      "Happy",
+      "House",
+      "Cat",
+      "Sun"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Mond",
+    "options": [
+      "Big",
+      "Listen",
+      "Yesterday",
+      "Moon"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Baum",
+    "options": [
+      "Tree",
+      "Listen",
+      "Father",
+      "Moon"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Blume",
+    "options": [
+      "Sleep",
+      "No",
+      "Flower",
+      "Speak"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Katze",
+    "options": [
+      "Cat",
+      "House",
+      "Big",
+      "Today"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Hund",
+    "options": [
+      "Family",
+      "Dog",
+      "Good",
+      "Book"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Vogel",
+    "options": [
+      "Book",
+      "Bird",
+      "Stop",
+      "Cat"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Straße",
+    "options": [
+      "Road",
+      "Love",
+      "Drink",
+      "Night"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Auto",
+    "options": [
+      "Car",
+      "Yesterday",
+      "Come",
+      "Listen"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Zug",
+    "options": [
+      "Tree",
+      "Help",
+      "Drink",
+      "Train"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Geld",
+    "options": [
+      "Stop",
+      "Money",
+      "Today",
+      "Mother"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Arbeit",
+    "options": [
+      "Work",
+      "Flower",
+      "Please",
+      "Sun"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Hilfe",
+    "options": [
+      "Happy",
+      "Car",
+      "Listen",
+      "Help"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Stopp",
+    "options": [
+      "Friend",
+      "Money",
+      "Good",
+      "Stop"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Gehen",
+    "options": [
+      "Bird",
+      "Thank you",
+      "Go",
+      "Yes"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Kommen",
+    "options": [
+      "House",
+      "Car",
+      "Come",
+      "Speak"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Essen",
+    "options": [
+      "Eat",
+      "Happy",
+      "Flower",
+      "Night"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Trinken",
+    "options": [
+      "Please",
+      "House",
+      "Drink",
+      "Thank you"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Schlafen",
+    "options": [
+      "Sleep",
+      "Good",
+      "Please",
+      "Help"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Lesen",
+    "options": [
+      "Write",
+      "Tree",
+      "Read",
+      "Mother"
+    ],
+    "correct": 2
+  },
+  {
+    "target": "Schreiben",
+    "options": [
+      "House",
+      "Road",
+      "Cat",
+      "Write"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Sprechen",
+    "options": [
+      "Tomorrow",
+      "Speak",
+      "Happy",
+      "Today"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Hören",
+    "options": [
+      "Come",
+      "Listen",
+      "Bad",
+      "Day"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Schauen",
+    "options": [
+      "Look",
+      "No",
+      "Hello",
+      "Listen"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Glücklich",
+    "options": [
+      "Drink",
+      "House",
+      "Water",
+      "Happy"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Traurig",
+    "options": [
+      "Sad",
+      "Go",
+      "Thank you",
+      "Dog"
+    ],
+    "correct": 0
+  },
+  {
+    "target": "Gut",
+    "options": [
+      "Work",
+      "Good",
+      "Tree",
+      "Food"
+    ],
+    "correct": 1
+  },
+  {
+    "target": "Schlecht",
+    "options": [
+      "Sun",
+      "Speak",
+      "Road",
+      "Bad"
+    ],
+    "correct": 3
+  },
+  {
+    "target": "Groß",
+    "options": [
+      "Big",
+      "Go",
+      "Food",
+      "Work"
+    ],
+    "correct": 0
+  }
+];
