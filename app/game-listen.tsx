@@ -151,7 +151,8 @@ export default function GameListenScreen() {
   const currentQ = questions[currentIndex];
 
   useEffect(() => {
-    if (questions.length > 0 && !gameFinished && currentQ) setTimeout(playAudio, 400);
+    // We intentionally removed autoplay here because browsers block it!
+    // The user must tap the headphone icon manually.
   }, [currentIndex, gameFinished, questions]);
 
   const playAudio = () => {

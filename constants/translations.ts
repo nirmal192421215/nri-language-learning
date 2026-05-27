@@ -97,43 +97,41 @@ export const GAME_POOLS: Record<string, Array<{ text: string, audio: string }>> 
 
 export const LISTEN_GAME_POOLS: Record<string, Array<{ target: string, options: string[], correct: number }>> = {
   tamil: [
-    { target: 'வணக்கம்', options: ['Hello', 'Water', 'Food', 'School'], correct: 0 },
-    { target: 'நன்றி', options: ['Please', 'Thank you', 'Sorry', 'Yes'], correct: 1 },
-    { target: 'தண்ணீர்', options: ['Apple', 'Water', 'House', 'Tree'], correct: 1 },
-    { target: 'உணவு', options: ['Book', 'Friend', 'Food', 'Money'], correct: 2 },
-    { target: 'பள்ளி', options: ['Hospital', 'Office', 'Shop', 'School'], correct: 3 },
+    { target: 'வணக்கம்', options: ['வணக்கம்', 'தண்ணீர்', 'உணவு', 'பள்ளி'], correct: 0 },
+    { target: 'நன்றி', options: ['தயவுசெய்து', 'நன்றி', 'மன்னிக்கவும்', 'ஆமாம்'], correct: 1 },
+    { target: 'தண்ணீர்', options: ['ஆப்பிள்', 'தண்ணீர்', 'வீடு', 'மரம்'], correct: 1 },
+    { target: 'உணவு', options: ['புத்தகம்', 'நண்பன்', 'உணவு', 'பணம்'], correct: 2 },
+    { target: 'பள்ளி', options: ['மருத்துவமனை', 'அலுவலகம்', 'கடை', 'பள்ளி'], correct: 3 },
   ],
   hindi: [
-    { target: 'नमस्ते', options: ['Hello', 'Water', 'Food', 'School'], correct: 0 },
-    { target: 'धन्यवाद', options: ['Please', 'Thank you', 'Sorry', 'Yes'], correct: 1 },
-    { target: 'पानी', options: ['Apple', 'Water', 'House', 'Tree'], correct: 1 },
-    { target: 'खाना', options: ['Book', 'Friend', 'Food', 'Money'], correct: 2 },
-    { target: 'स्कूल', options: ['Hospital', 'Office', 'Shop', 'School'], correct: 3 },
+    { target: 'नमस्ते', options: ['नमस्ते', 'पानी', 'खाना', 'स्कूल'], correct: 0 },
+    { target: 'धन्यवाद', options: ['कृपया', 'धन्यवाद', 'माफ़ करें', 'हाँ'], correct: 1 },
+    { target: 'पानी', options: ['सेब', 'पानी', 'घर', 'पेड़'], correct: 1 },
+    { target: 'खाना', options: ['किताब', 'दोस्त', 'खाना', 'पैसे'], correct: 2 },
+    { target: 'स्कूल', options: ['अस्पताल', 'कार्यालय', 'दुकान', 'स्कूल'], correct: 3 },
   ],
   telugu: [
-    { target: 'నమస్కారం', options: ['Hello', 'Water', 'Food', 'School'], correct: 0 },
-    { target: 'ధన్యవాదాలు', options: ['Please', 'Thank you', 'Sorry', 'Yes'], correct: 1 },
-    { target: 'నీరు', options: ['Apple', 'Water', 'House', 'Tree'], correct: 1 },
-    { target: 'ఆహారం', options: ['Book', 'Friend', 'Food', 'Money'], correct: 2 },
-    { target: 'పాఠశాల', options: ['Hospital', 'Office', 'Shop', 'School'], correct: 3 },
+    { target: 'నమస్కారం', options: ['నమస్కారం', 'నీరు', 'ఆహారం', 'పాఠశాల'], correct: 0 },
+    { target: 'ధన్యవాదాలు', options: ['దయచేసి', 'ధన్యవాదాలు', 'క్షమించండి', 'అవును'], correct: 1 },
+    { target: 'నీరు', options: ['ఆపిల్', 'నీరు', 'ఇల్లు', 'చెట్టు'], correct: 1 },
+    { target: 'ఆహారం', options: ['పుస్తకం', 'స్నేహితుడు', 'ఆహారం', 'డబ్బు'], correct: 2 },
+    { target: 'పాఠశాల', options: ['ఆసుపత్రి', 'కార్యాలయం', 'దుకాణం', 'పాఠశాల'], correct: 3 },
   ],
   malayalam: [
-    { target: 'നമസ്കാരം', options: ['Hello', 'Water', 'Food', 'School'], correct: 0 },
-    { target: 'നന്ദി', options: ['Please', 'Thank you', 'Sorry', 'Yes'], correct: 1 },
-    { target: 'വെള്ളം', options: ['Apple', 'Water', 'House', 'Tree'], correct: 1 },
-    { target: 'ഭക്ഷണം', options: ['Book', 'Friend', 'Food', 'Money'], correct: 2 },
-    { target: 'സ്കൂൾ', options: ['Hospital', 'Office', 'Shop', 'School'], correct: 3 },
+    { target: 'നമസ്കാരം', options: ['നമസ്കാരം', 'വെള്ളം', 'ഭക്ഷണം', 'സ്കൂൾ'], correct: 0 },
+    { target: 'നന്ദി', options: ['ദയവായി', 'നന്ദി', 'ക്ഷമിക്കണം', 'അതെ'], correct: 1 },
+    { target: 'വെള്ളം', options: ['ആപ്പിൾ', 'വെള്ളം', 'വീട്', 'മരം'], correct: 1 },
+    { target: 'ഭക്ഷണം', options: ['പുസ്തകം', 'സുഹൃത്ത്', 'ഭക്ഷണം', 'പണം'], correct: 2 },
+    { target: 'സ്കൂൾ', options: ['ആശുപത്രി', 'ഓഫീസ്', 'കട', 'സ്കൂൾ'], correct: 3 },
   ],
   kannada: [
-    { target: 'ನಮಸ್ಕಾರ', options: ['Hello', 'Water', 'Food', 'School'], correct: 0 },
-    { target: 'ಧನ್ಯವಾದ', options: ['Please', 'Thank you', 'Sorry', 'Yes'], correct: 1 },
-    { target: 'ನೀರು', options: ['Apple', 'Water', 'House', 'Tree'], correct: 1 },
-    { target: 'ಆಹಾರ', options: ['Book', 'Friend', 'Food', 'Money'], correct: 2 },
-    { target: 'ಶಾಲೆ', options: ['Hospital', 'Office', 'Shop', 'School'], correct: 3 },
+    { target: 'ನಮಸ್ಕಾರ', options: ['ನಮಸ್ಕಾರ', 'ನೀರು', 'ಆಹಾರ', 'ಶಾಲೆ'], correct: 0 },
+    { target: 'ಧನ್ಯವಾದ', options: ['ದಯವಿಟ್ಟು', 'ಧನ್ಯವಾದ', 'ಕ್ಷಮಿಸಿ', 'ಹೌದು'], correct: 1 },
+    { target: 'ನೀರು', options: ['ಸೇಬು', 'ನೀರು', 'ಮನೆ', 'ಮರ'], correct: 1 },
+    { target: 'ಆಹಾರ', options: ['ಪುಸ್ತಕ', 'ಸ್ನೇಹಿತ', 'ಆಹಾರ', 'ಹಣ'], correct: 2 },
+    { target: 'ಶಾಲೆ', options: ['ಆಸ್ಪತ್ರೆ', 'ಕಚೇರಿ', 'ಅಂಗಡಿ', 'ಶಾಲೆ'], correct: 3 },
   ]
 };
-
-;
 
 export const PICTURE_GAME_POOLS: Record<string, Array<{ emoji: string, options: string[], correct: number }>> = {
   tamil: [
