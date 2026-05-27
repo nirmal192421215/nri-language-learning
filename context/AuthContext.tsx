@@ -203,6 +203,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.warn('Firebase logout error:', e);
     }
     await AsyncStorage.removeItem('userEmail');
+    await AsyncStorage.removeItem('learningLanguage');
+    await AsyncStorage.removeItem('localXp');
+    await AsyncStorage.removeItem('localLevel');
+    await AsyncStorage.removeItem('localCompletedModules');
     setUser(null);
   };
 

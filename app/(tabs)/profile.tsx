@@ -37,11 +37,12 @@ const TIER_GRADIENT: Record<string, [string, string]> = {
 
 export default function ProfileScreen() {
   const router = useRouter();
-  const { user, logout, updateProfile } = useAuth();
+  const { user, logout, updateProfile, setLearningLanguage } = useAuth();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(user?.name === '[object Object]' ? '' : (user?.name || ''));
   const [editAvatar, setEditAvatar] = useState<AvatarKey>((user?.avatar as AvatarKey) || 'tiger');
+  const [editLanguage, setEditLanguage] = useState(user?.learningLanguage || 'tamil');
 
   const saveScale = useSharedValue(1);
   const avatarBounce = useSharedValue(1);
@@ -68,6 +69,9 @@ export default function ProfileScreen() {
 
   const handleSave = async () => {
     await updateProfile(editName, editAvatar);
+    if (setLearningLanguage && editLanguage !== user.learningLanguage) {
+      await setLearningLanguage(editLanguage);
+    }
     setIsEditing(false);
   };
 
@@ -120,6 +124,16 @@ export default function ProfileScreen() {
                   </Pressable>
                 ))}
               </View>
+              
+              <Text style={styles.editLabel}>Target Language 🌍</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+                {['tamil', 'hindi', 'telugu', 'malayalam', 'kannada', 'spanish', 'french', 'german'].map(l => (
+                  <Pressable key={l} onPress={() => setEditLanguage(l)} style={{ backgroundColor: editLanguage === l ? Colors.purple : 'rgba(255,255,255,0.2)', paddingHorizontal: 12, paddingVertical: 8, borderRadius: Radius.pill, borderWidth: 2, borderColor: editLanguage === l ? '#FFF' : 'rgba(255,255,255,0.3)' }}>
+                    <Text style={{ fontFamily: Fonts.bodySemi, color: '#FFF', textTransform: 'capitalize' }}>{l}</Text>
+                  </Pressable>
+                ))}
+              </View>
+
               <Text style={styles.editLabel}>Your Name ✏️</Text>
               <TextInput
                 style={styles.nameInput}
