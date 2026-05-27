@@ -268,6 +268,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await AsyncStorage.setItem('learningLanguage', langId);
     if (user) {
       setUser({ ...user, learningLanguage: langId });
+      try {
+        await fetch(`${API_URL}/update-language`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: user.email, learningLanguage: langId })
+        });
+      } catch (e) {
+        console.warn('MongoDB update-language error:', e);
+      }
     }
   };
 

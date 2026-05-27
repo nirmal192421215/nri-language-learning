@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema({
   streak: { type: Number, default: 1 },
   lastLoginDate: { type: Date, default: Date.now },
   level: { type: String, default: "Beginner - Level 1" },
-  levelProgress: { type: Number, default: 0 }
+  levelProgress: { type: Number, default: 0 },
+  learningLanguage: { type: String, default: "tamil" }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -112,6 +113,21 @@ app.post('/api/update-profile', async (req, res) => {
     const user = await User.findOneAndUpdate(
       { email },
       { name, avatar },
+      { new: true }
+    );
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// API: Update Learning Language
+app.post('/api/update-language', async (req, res) => {
+  try {
+    const { email, learningLanguage } = req.body;
+    const user = await User.findOneAndUpdate(
+      { email },
+      { learningLanguage },
       { new: true }
     );
     res.json(user);
