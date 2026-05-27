@@ -37,7 +37,7 @@ export default function QuizUI({ skill, title }: { skill: string, title: string 
           const lang = user.learningLanguage || 'tamil';
           const pool = QUIZ_POOLS[lang] || QUIZ_POOLS['tamil'];
           const shuffled = [...pool].sort(() => Math.random() - 0.5);
-          const mappedQuestions = shuffled.slice(0, 10).map((q, idx) => ({
+          const mappedQuestions = shuffled.slice(0, 50).map((q, idx) => ({
             id: idx,
             question: `What is the translation for "${q.target}"?`,
             options: q.options,

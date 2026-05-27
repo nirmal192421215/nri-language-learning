@@ -99,7 +99,7 @@ export async function generatePracticeLesson(skill: string, level: string, langu
 
   const prompt = `You are an expert language tutor teaching ${language}. 
   The user is currently at the proficiency level: ${level}.
-  Create exactly 5 multiple-choice practice questions focused specifically on the topic of [${skill}].
+  Create exactly 50 multiple-choice practice questions focused specifically on the topic of [${skill}].
   
   CRITICAL DIFFICULTY INSTRUCTIONS:
   - If ${level} includes "Beginner", make the exercises very simple, using basic, common words and short sentences.
@@ -108,7 +108,7 @@ export async function generatePracticeLesson(skill: string, level: string, langu
   
   The 'question' text MUST be in English.
   The 4 'options' MUST be written in the native ${language} script.
-  Output JSON array. Keys: id (0-4), question (string), options (4 strings), correctOption (0-3), type ("text").`;
+  Output JSON array. Keys: id (0-49), question (string), options (4 strings), correctOption (0-3), type ("text").`;
 
   try {
     const result = await model.generateContent(prompt);
