@@ -165,9 +165,7 @@ export default function GameListenScreen() {
   const playAudio = () => {
     speakerScale.value = withSequence(withSpring(1.2, { damping: 8 }), withSpring(1));
     Speech.stop();
-    setTimeout(() => {
-      Speech.speak(currentQ.target, { language: speechCode, rate: 0.85, pitch: 1 });
-    }, 50);
+    Speech.speak(currentQ.target, { language: speechCode, rate: 0.85, pitch: 1 });
   };
 
   const handleSelect = (idx: number) => {
