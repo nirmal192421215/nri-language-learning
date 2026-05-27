@@ -299,7 +299,7 @@ export default function VoiceRecordingUI({ skill, title }: { skill: string; titl
         </Text>
       </View>
       
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1, paddingBottom: 60, justifyContent: 'center' }} showsVerticalScrollIndicator={false}>
         <Animated.View key={currentIndex} entering={SlideInRight.springify()} style={styles.playArea}>
           <View style={styles.targetWordBox}>
             <Text style={styles.targetLabel}>Pronounce this word clearly:</Text>
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 20,
     elevation: 5,
-    marginBottom: 60,
+    marginBottom: 30,
   },
   targetLabel: {
     fontSize: 14,
@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#4B5563',
     fontWeight: '500',
-    marginBottom: 40,
+    marginBottom: 20,
     textAlign: 'center',
     paddingHorizontal: 20,
   },
