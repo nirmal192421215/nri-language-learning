@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Pressable, Platform } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Platform, ScrollView } from 'react-native';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
@@ -216,17 +216,17 @@ export default function VoiceRecordingUI({ skill, title }: { skill: string; titl
     setHasRecorded(true);
     setIsRecording(false);
     stopWaveAnimation();
-    
-    // Auto-advance after showing score for 2 seconds
-    setTimeout(() => {
-      if (currentIndex < questions.length - 1) {
-        setCurrentIndex(i => i + 1);
-        setHasRecorded(false);
-        setScore(null);
-      } else {
-        setIsFinished(true);
-      }
-    }, 2000);
+  };
+
+  const handleNext = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(i => i + 1);
+      setHasRecorded(false);
+      setScore(null);
+      setErrorMsg(null);
+    } else {
+      setIsFinished(true);
+    }
   };
 
   const handleComplete = async () => {
@@ -299,47 +299,52 @@ export default function VoiceRecordingUI({ skill, title }: { skill: string; titl
         </Text>
       </View>
       
-      <Animated.View key={currentIndex} entering={SlideInRight.springify()} style={styles.playArea}>
-        <View style={styles.targetWordBox}>
-          <Text style={styles.targetLabel}>Pronounce this word clearly:</Text>
-          <Text style={styles.targetWord}>{currentQ.phrase}</Text>
-          <Text style={styles.targetPhonetic}>{currentQ.english}</Text>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+        <Animated.View key={currentIndex} entering={SlideInRight.springify()} style={styles.playArea}>
+          <View style={styles.targetWordBox}>
+            <Text style={styles.targetLabel}>Pronounce this word clearly:</Text>
+            <Text style={styles.targetWord}>{currentQ.phrase}</Text>
+            <Text style={styles.targetPhonetic}>{currentQ.english}</Text>
+          </View>
+
+        <View style={styles.micContainer}>
+          {isRecording && (
+            <>
+              <Animated.View style={[styles.wave, waveStyle3, { backgroundColor: '#10B981' }]} />
+              <Animated.View style={[styles.wave, waveStyle2, { backgroundColor: '#10B981' }]} />
+              <Animated.View style={[styles.wave, waveStyle1, { backgroundColor: '#10B981' }]} />
+            </>
+          )}
+          
+          <Pressable 
+            onPress={toggleRecording}
+            style={[styles.micButton, isRecording && styles.micButtonRecording, hasRecorded && styles.micButtonDisabled]}
+          >
+            <Text style={styles.micIcon}>🎙️</Text>
+          </Pressable>
         </View>
 
-      <View style={styles.micContainer}>
-        {isRecording && (
-          <>
-            <Animated.View style={[styles.wave, waveStyle3, { backgroundColor: '#10B981' }]} />
-            <Animated.View style={[styles.wave, waveStyle2, { backgroundColor: '#10B981' }]} />
-            <Animated.View style={[styles.wave, waveStyle1, { backgroundColor: '#10B981' }]} />
-          </>
+        <Text style={[styles.instructionText, errorMsg && styles.errorText]}>
+          {errorMsg 
+            ? errorMsg 
+            : hasRecorded 
+              ? (score !== null ? 'Analysis complete!' : 'Analyzing pronunciation...') 
+              : isRecording
+                ? 'Tap to stop recording'
+                : 'Tap to start recording'}
+        </Text>
+
+        {score !== null && (
+          <Animated.View entering={FadeInUp} style={styles.resultBox}>
+            <Text style={styles.resultScore}>{score}%</Text>
+            <Text style={styles.resultLabel}>Accuracy</Text>
+            <Pressable style={styles.nextBtn} onPress={handleNext}>
+              <Text style={styles.nextBtnText}>Next Question →</Text>
+            </Pressable>
+          </Animated.View>
         )}
-        
-        <Pressable 
-          onPress={toggleRecording}
-          style={[styles.micButton, isRecording && styles.micButtonRecording, hasRecorded && styles.micButtonDisabled]}
-        >
-          <Text style={styles.micIcon}>🎙️</Text>
-        </Pressable>
-      </View>
-
-      <Text style={[styles.instructionText, errorMsg && styles.errorText]}>
-        {errorMsg 
-          ? errorMsg 
-          : hasRecorded 
-            ? (score !== null ? 'Analysis complete!' : 'Analyzing pronunciation...') 
-            : isRecording
-              ? 'Tap to stop recording'
-              : 'Tap to start recording'}
-      </Text>
-
-      {score !== null && (
-        <Animated.View entering={FadeInUp} style={styles.resultBox}>
-          <Text style={styles.resultScore}>{score}%</Text>
-          <Text style={styles.resultLabel}>Accuracy</Text>
         </Animated.View>
-      )}
-      </Animated.View>
+      </ScrollView>
     </View>
   );
 }
@@ -477,5 +482,18 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  nextBtn: {
+    backgroundColor: 'white',
+    paddingHorizontal: 28,
+    paddingVertical: 14,
+    borderRadius: Radius.pill,
+    marginTop: 10,
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 4px 12px rgba(0,0,0,0.1)' } : { ...Shadow.soft }),
+  },
+  nextBtnText: {
+    fontFamily: Fonts.bodySemi,
+    color: '#059669',
+    fontSize: 16,
   }
 });
