@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
   progressBarBg: { flex: 1, height: 12, backgroundColor: '#E5E7EB', borderRadius: 6, marginHorizontal: 15, overflow: 'hidden' },
   progressBarFill: { height: '100%', backgroundColor: '#10B981' },
   progressText: { fontSize: 16, fontWeight: 'bold', color: '#059669' },
-  playArea: { flex: 1, alignItems: 'center', paddingHorizontal: 20 },
+  playArea: { width: '100%', alignItems: 'center', paddingHorizontal: 20 },
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
