@@ -30,6 +30,7 @@ type UserData = {
   completedModules: string[]; // tracks completed pillars at current tier e.g. ['foundations','communication']
   unlockedCountries: string[];
   currentCountry: string;
+  coins: number;
 };
 
 type AuthContextType = {
@@ -37,7 +38,7 @@ type AuthContextType = {
   isLoading: boolean;
   login: (email: string) => Promise<UserData | null>;
   logout: () => Promise<void>;
-  updateProgress: (xpGained: number) => void;
+  updateProgress: (xpGained: number, coinsGained?: number) => void;
   setAssessmentLevel: (level: string, score: number) => void;
   updateProfile: (name: string, avatar: string) => Promise<void>;
   setLearningLanguage: (langId: string) => Promise<void>;
@@ -77,13 +78,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           });
           const data = await res.json();
           if (data && data.error) {
-            setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry });
+            setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, coins: savedCoins, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry });
           } else {
-            setUser({ ...data, learningLanguage: data.learningLanguage || lang, completedModules: data.completedModules || [], unlockedCountries: data.unlockedCountries || savedUnlockedCountries, currentCountry: data.currentCountry || savedCurrentCountry });
+            setUser({ ...data, learningLanguage: data.learningLanguage || lang, completedModules: data.completedModules || [], unlockedCountries: data.unlockedCountries || savedUnlockedCountries, currentCountry: data.currentCountry || savedCurrentCountry, coins: data.coins || savedCoins });
           }
         } catch (e) {
           console.warn('MongoDB load error (falling back to offline mode):', e);
-          setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry });
+          setUser({ id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, coins: savedCoins, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry });
         }
       }
       setIsLoading(false);
@@ -108,20 +109,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const localCompletedStr = await AsyncStorage.getItem('localCompletedModules');
       const localUnlockedCountries = await AsyncStorage.getItem('unlockedCountries');
       const localCurrentCountry = await AsyncStorage.getItem('currentCountry');
+      const localCoinsStr = await AsyncStorage.getItem('localCoins');
       
       const savedXp = localXpStr ? parseInt(localXpStr, 10) : 25400;
+      const savedCoins = localCoinsStr ? parseInt(localCoinsStr, 10) : 0;
       const savedLevel = localLevel || 'Pro - Level 5';
       const savedCompleted = localCompletedStr ? JSON.parse(localCompletedStr) : [];
       const savedUnlockedCountries = localUnlockedCountries ? JSON.parse(localUnlockedCountries) : ['india'];
       const savedCurrentCountry = localCurrentCountry || 'india';
 
       if (data && data.error) {
-        const mockUser = { id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry };
+        const mockUser = { id: 'local1', email, name: email.split('@')[0], avatar: 'tiger', xp: savedXp, coins: savedCoins, streak: 5, level: savedLevel, levelProgress: 60, learningLanguage: lang, completedModules: savedCompleted, unlockedCountries: savedUnlockedCountries, currentCountry: savedCurrentCountry };
         setUser(mockUser);
         setIsLoading(false);
         return mockUser as any;
       } else {
-        const fullUser = { ...data, learningLanguage: data.learningLanguage || lang, unlockedCountries: data.unlockedCountries || savedUnlockedCountries, currentCountry: data.currentCountry || savedCurrentCountry };
+        const fullUser = { ...data, learningLanguage: data.learningLanguage || lang, unlockedCountries: data.unlockedCountries || savedUnlockedCountries, currentCountry: data.currentCountry || savedCurrentCountry, coins: data.coins || savedCoins };
         setUser(fullUser);
         setIsLoading(false);
         return fullUser;
@@ -211,22 +214,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return { leveledUp, newTier: getTier(newLevel) };
   };
 
-  const logout = async () => {
-    try {
-      await signOutFirebase();
-    } catch (e) {
-      console.warn('Firebase logout error:', e);
-    }
-    await AsyncStorage.removeItem('userEmail');
-    await AsyncStorage.removeItem('learningLanguage');
-    await AsyncStorage.removeItem('localXp');
-    await AsyncStorage.removeItem('localLevel');
-    await AsyncStorage.removeItem('localCompletedModules');
-    await AsyncStorage.removeItem('unlockedCountries');
-    await AsyncStorage.removeItem('currentCountry');
-    setUser(null);
-  };
-
   const setAssessmentLevel = async (levelTier: string, score: number) => {
     if (!user) return;
     try {
@@ -246,17 +233,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const updateProgress = async (xpGained: number) => {
+  const updateProgress = async (xpGained: number, coinsGained: number = 0) => {
     if (!user) return;
     try {
       const res = await fetch(`${API_URL}/update-progress`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: user.email, xpGained })
+        body: JSON.stringify({ email: user.email, xpGained, coinsGained })
       });
       const data = await res.json();
       if (data && data.error) {
-        setUser({ ...user, xp: user.xp + xpGained });
+        setUser({ ...user, xp: user.xp + xpGained, coins: (user.coins || 0) + coinsGained });
       } else {
         setUser({ ...data, learningLanguage: user.learningLanguage });
       }
@@ -313,6 +300,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const data = await res.json();
       const lang = await AsyncStorage.getItem('learningLanguage') || 'tamil';
       
+      const localCoinsStr = await AsyncStorage.getItem('localCoins');
+      const savedCoins = localCoinsStr ? parseInt(localCoinsStr, 10) : 0;
+      
       let finalUser;
       if (data && data.error) {
         const localXpStr = await AsyncStorage.getItem('localXp');
@@ -323,10 +313,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const savedLevel = localLevel || 'Beginner - Level 1';
         const savedCompleted = localCompletedStr ? JSON.parse(localCompletedStr) : [];
         
-        const mockUser = { id: 'local1', email, name: name || email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 1, level: savedLevel, levelProgress: 0, learningLanguage: lang, completedModules: savedCompleted };
+        const mockUser = { id: 'local1', email, name: name || email.split('@')[0], avatar: 'tiger', xp: savedXp, coins: savedCoins, streak: 1, level: savedLevel, levelProgress: 0, learningLanguage: lang, completedModules: savedCompleted };
         finalUser = mockUser;
       } else {
-        finalUser = { ...data, learningLanguage: data.learningLanguage || lang, completedModules: data.completedModules || [] };
+        finalUser = { ...data, learningLanguage: data.learningLanguage || lang, completedModules: data.completedModules || [], coins: data.coins || savedCoins };
       }
 
       if (name && (!data || data.name !== name)) {
@@ -354,12 +344,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const localXpStr = await AsyncStorage.getItem('localXp');
       const localLevel = await AsyncStorage.getItem('localLevel');
       const localCompletedStr = await AsyncStorage.getItem('localCompletedModules');
+      const localCoinsStr = await AsyncStorage.getItem('localCoins');
       
       const savedXp = localXpStr ? parseInt(localXpStr, 10) : 0;
+      const savedCoins = localCoinsStr ? parseInt(localCoinsStr, 10) : 0;
       const savedLevel = localLevel || 'Beginner - Level 1';
       const savedCompleted = localCompletedStr ? JSON.parse(localCompletedStr) : [];
       
-      const mockUser = { id: 'local1', email, name: name || email.split('@')[0], avatar: 'tiger', xp: savedXp, streak: 1, level: savedLevel, levelProgress: 0, learningLanguage: lang, completedModules: savedCompleted };
+      const mockUser = { id: 'local1', email, name: name || email.split('@')[0], avatar: 'tiger', xp: savedXp, coins: savedCoins, streak: 1, level: savedLevel, levelProgress: 0, learningLanguage: lang, completedModules: savedCompleted };
       setUser(mockUser);
       setIsLoading(false);
       return mockUser as any;
@@ -381,6 +373,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } catch (e) {
       console.warn('MongoDB update-country error:', e);
     }
+  };
+
+  const logout = async () => {
+    try {
+      await signOutFirebase();
+    } catch (e) {
+      console.warn('Firebase logout error:', e);
+    }
+    await AsyncStorage.removeItem('userEmail');
+    await AsyncStorage.removeItem('learningLanguage');
+    await AsyncStorage.removeItem('localXp');
+    await AsyncStorage.removeItem('localLevel');
+    await AsyncStorage.removeItem('localCompletedModules');
+    await AsyncStorage.removeItem('unlockedCountries');
+    await AsyncStorage.removeItem('currentCountry');
+    await AsyncStorage.removeItem('localCoins');
+    setUser(null);
   };
 
   return (

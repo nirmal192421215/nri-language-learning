@@ -3,9 +3,10 @@ import { View, Text, StyleSheet, ScrollView, Pressable, Platform, Dimensions, Ac
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { FadeInDown, SlideInDown, useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, Easing, withDelay } from 'react-native-reanimated';
 import { useAuth } from '../../context/AuthContext';
-import { useRouter, Redirect } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Colors, Fonts, Radius, Shadow } from '../../components/KidsTheme';
 import MascotAssistant from '../../components/MascotAssistant';
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const { width, height } = Dimensions.get('window');
@@ -73,6 +74,21 @@ function FloatingIsland({ country, index, isUnlocked, isCurrent, onPress }: any)
 export default function WorldJourneyScreen() {
   const { user, isLoading } = useAuth();
   const router = useRouter();
+  const params = useLocalSearchParams();
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  // The Airplane Animation State
+  const planeAnim = useSharedValue(0);
+
+  useEffect(() => {
+    if (params.justUnlocked) {
+      // Trigger unlock animation!
+      setTimeout(() => setShowConfetti(true), 500);
+      
+      // We would animate planeAnim from 0 to 1 along a bezier curve
+      // For simplicity here, we'll just fire the confetti as a reward for unlocking
+    }
+  }, [params]);
 
   if (isLoading) {
     return (
@@ -82,7 +98,10 @@ export default function WorldJourneyScreen() {
     );
   }
   
-  if (!user) return <Redirect href="/" />;
+  if (!user) {
+    router.replace('/');
+    return null;
+  }
 
   const unlockedCountries = user.unlockedCountries || ['india'];
   const currentCountry = user.currentCountry || 'india';
@@ -100,11 +119,19 @@ export default function WorldJourneyScreen() {
       <Text style={[styles.cloud, { top: 120, right: 30, fontSize: 60 }]}>☁️</Text>
       <Text style={[styles.cloud, { top: 300, left: -10, fontSize: 80 }]}>☁️</Text>
 
+      {showConfetti && <ConfettiCannon count={200} origin={{x: width/2, y: -20}} fallSpeed={3000} fadeOut />}
+
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         <Animated.View entering={SlideInDown.springify()} style={styles.header}>
           <Text style={styles.title}>World Journey</Text>
           <Text style={styles.subtitle}>Travel the globe and master your language through epic adventures! 🌍🚀</Text>
+          <View style={styles.statsRow}>
+            <View style={styles.statPill}><Text style={styles.statText}>⭐ {user.xp} XP</Text></View>
+            <View style={[styles.statPill, { borderColor: '#CA8A04', backgroundColor: '#FEF08A' }]}>
+              <Text style={[styles.statText, { color: '#854D0E' }]}>🪙 {user.coins || 0}</Text>
+            </View>
+          </View>
         </Animated.View>
 
         <View style={styles.mapArea}>
@@ -113,8 +140,8 @@ export default function WorldJourneyScreen() {
               key={country.id}
               country={country}
               index={idx}
-              isUnlocked={unlockedCountries.includes(country.id)}
-              isCurrent={currentCountry === country.id}
+              isUnlocked={unlockedCountries.includes(country.id) || params.justUnlocked === country.id}
+              isCurrent={currentCountry === country.id || params.justUnlocked === country.id}
               onPress={() => handlePress(country.id)}
             />
           ))}
@@ -123,7 +150,7 @@ export default function WorldJourneyScreen() {
         <View style={{ height: 100 }} />
       </ScrollView>
 
-      <MascotAssistant message="Ready for an adventure? Pick your destination! ✈️" />
+      <MascotAssistant message={params.justUnlocked ? `Incredible! We just arrived in ${WORLD_MAP.find(c => c.id === params.justUnlocked)?.name}! ✈️` : "Ready for an adventure? Pick your destination! ✈️"} />
     </View>
   );
 }
@@ -134,7 +161,10 @@ const styles = StyleSheet.create({
   scrollContent: { paddingTop: Platform.OS === 'ios' ? 60 : 40, paddingBottom: 60 },
   header: { paddingHorizontal: 24, marginBottom: 40, alignItems: 'center' },
   title: { fontFamily: Fonts.heading, fontSize: 36, color: '#0369A1', textAlign: 'center', marginBottom: 8 },
-  subtitle: { fontFamily: Fonts.bodyReg, fontSize: 16, color: '#0284C7', textAlign: 'center' },
+  subtitle: { fontFamily: Fonts.bodyReg, fontSize: 16, color: '#0284C7', textAlign: 'center', marginBottom: 15 },
+  statsRow: { flexDirection: 'row', gap: 10 },
+  statPill: { backgroundColor: '#E0F2FE', paddingHorizontal: 16, paddingVertical: 8, borderRadius: Radius.pill, borderWidth: 2, borderColor: '#0284C7' },
+  statText: { fontFamily: Fonts.bodySemi, color: '#0369A1', fontSize: 16 },
   cloud: { position: 'absolute', fontSize: 50, opacity: 0.8 },
   
   mapArea: { width: '100%', paddingHorizontal: 20, alignItems: 'center' },
