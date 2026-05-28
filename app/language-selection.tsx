@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, ScrollView, Platform } from 'react-native';
+import { View, Text, Pressable, StyleSheet, ScrollView, Platform, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import Animated, { FadeIn, FadeInRight, FadeInUp, useSharedValue, useAnimatedStyle, withSpring, withRepeat, withSequence, withTiming, Easing } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -91,7 +91,7 @@ export default function LanguageSelectionScreen() {
             <View style={styles.mascotSpeech}>
               <Text style={styles.mascotSpeechText}>Pick your language! 🎯</Text>
             </View>
-            <Text style={styles.mascotEmoji}>🐒</Text>
+            <Image source={require('../assets/images/monkey_mascot.png')} style={{ width: 80, height: 80, borderRadius: 40 }} />
           </View>
           <Text style={styles.title}>Which language{'\n'}do you want to learn?</Text>
           <Text style={styles.subtitle}>Choose your heritage language to get started!</Text>

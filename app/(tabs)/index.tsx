@@ -120,7 +120,7 @@ export default function DashboardScreen() {
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.bg }}>
-        <Text style={{ fontSize: 60 }}>🐒</Text>
+        <Image source={require('../../assets/images/monkey_mascot.png')} style={{ width: 100, height: 100, borderRadius: 50 }} />
         <ActivityIndicator size="large" color={Colors.green} style={{ marginTop: 16 }} />
         <Text style={{ fontFamily: Fonts.body, color: Colors.textMid, marginTop: 12, fontSize: 16 }}>Loading your world... 🌍</Text>
       </View>

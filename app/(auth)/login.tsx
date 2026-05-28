@@ -94,7 +94,7 @@ export default function LoginScreen() {
         <View style={styles.mascotBubble}>
           <Text style={styles.mascotBubbleText}>Welcome back, superstar! 🌟</Text>
         </View>
-        <Text style={styles.mascotEmoji}>🐒</Text>
+        <Image source={require('../../assets/images/monkey_mascot.png')} style={{ width: 80, height: 80, borderRadius: 40 }} />
       </Animated.View>
 
       <Animated.View entering={FadeInUp.delay(200).springify()} style={styles.card}>
