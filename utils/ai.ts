@@ -165,6 +165,7 @@ export type Flashcard = {
   id: number;
   term: string;
   translation: string;
+  emoji: string;
 };
 
 export async function generateFlashcardLesson(skill: string, level: string, language: string): Promise<Flashcard[]> {
@@ -185,8 +186,9 @@ export async function generateFlashcardLesson(skill: string, level: string, lang
 
   'term' MUST be in the native ${language} script.
   'translation' MUST be the English translation.
+  'emoji' MUST be a single, highly relevant Unicode emoji representing the term visually.
   
-  Output JSON array of objects with keys: id (0-9), term (string), translation (string).`;
+  Output JSON array of objects with keys: id (0-9), term (string), translation (string), emoji (string).`;
 
   try {
     const result = await model.generateContent(prompt);

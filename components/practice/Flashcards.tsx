@@ -105,12 +105,14 @@ export default function Flashcards({ skill, title }: { skill: string, title: str
         {/* Front of Card */}
         <Animated.View style={[styles.card, frontAnimatedStyle]}>
           <Text style={styles.cardHint}>Tap to translate</Text>
+          {currentCard.emoji ? <Text style={{ fontSize: 80, marginBottom: 20 }}>{currentCard.emoji}</Text> : null}
           <Text style={styles.nativeText}>{currentCard.term}</Text>
         </Animated.View>
 
         {/* Back of Card */}
         <Animated.View style={[styles.card, styles.cardBack, backAnimatedStyle]}>
           <Text style={styles.cardHint}>Did you get it right?</Text>
+          {currentCard.emoji ? <Text style={{ fontSize: 80, marginBottom: 20 }}>{currentCard.emoji}</Text> : null}
           <Text style={styles.englishText}>{currentCard.translation}</Text>
         </Animated.View>
         
