@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   saveBtnText: { fontFamily: Fonts.body, fontSize: 16, color: Colors.textDark },
 
   statsRow: { flexDirection: 'row', gap: 10, marginBottom: 20, overflow: 'hidden' },
-  statCard: { flex: 1, alignItems: 'center', padding: 16, borderRadius: Radius.xl, borderWidth: 2.5, overflow: 'hidden' },
+  statCard: { flex: 1, alignItems: 'center', paddingHorizontal: 8, paddingVertical: 16, borderRadius: Radius.xl, borderWidth: 2.5, overflow: 'hidden' },
   statEmoji: { fontSize: 28, marginBottom: 4 },
   statValue: { fontFamily: Fonts.heading, fontSize: 22 },
   statLabel: { fontFamily: Fonts.bodyReg, fontSize: 11, color: Colors.textMid, marginTop: 2 },

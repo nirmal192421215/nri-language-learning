@@ -134,8 +134,8 @@ export default function WelcomeScreen() {
         {/* Title */}
         <Animated.View entering={FadeInUp.delay(200).springify()}>
           <Text style={styles.tagline}>🌴 Learn Your Roots!</Text>
-          <Text style={styles.title}>NRI Language{'\n'}Adventure</Text>
-          <Text style={styles.subtitle}>Fun lessons. Real fluency. Every day! 🎉</Text>
+          <Text style={[styles.title, width < 400 && { fontSize: 36, lineHeight: 42 }]}>NRI Language{'\n'}Adventure</Text>
+          <Text style={[styles.subtitle, width < 400 && { fontSize: 16 }]}>Fun lessons. Real fluency. Every day! 🎉</Text>
         </Animated.View>
 
         {/* Animated earth mascot */}
@@ -192,7 +192,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 24,
     backgroundColor: Colors.bg,
+    overflow: 'hidden',
   },
   cloud: {
     position: 'absolute',
