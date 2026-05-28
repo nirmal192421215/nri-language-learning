@@ -201,3 +201,44 @@ export async function generateFlashcardLesson(skill: string, level: string, lang
     throw error;
   }
 }
+
+export type ReadingStory = {
+  title: string;
+  titleEnglish: string;
+  paragraphs: Array<{ native: string; english: string; }>;
+  questions: Array<{ question: string; options: string[]; correctOption: number; }>;
+};
+
+export async function generateReadingLesson(level: string, language: string): Promise<ReadingStory> {
+  if (!hasApiKey()) throw new Error('API Key is missing');
+
+  const model = genAI.getGenerativeModel({ 
+    model: 'gemini-flash-lite-latest',
+    generationConfig: { responseMimeType: "application/json" }
+  });
+
+  const prompt = `You are a language teacher teaching ${language}. The user is at level: ${level}.
+  Create a short reading comprehension story in ${language}.
+  
+  CRITICAL DIFFICULTY INSTRUCTIONS: 
+  - If ${level} includes "Beginner", write 3-4 very simple sentences about daily life, animals, or food.
+  - If ${level} includes "Intermediate", write a short paragraph about a cultural event or a trip with moderate vocabulary.
+  - If ${level} includes "Pro", write a complex story, folk tale, or article with advanced grammar and idioms.
+  
+  Provide the following in your JSON response:
+  1. 'title': Story title in ${language}.
+  2. 'titleEnglish': English translation of the title.
+  3. 'paragraphs': An array of objects representing the sentences or paragraphs of the story. Each object must have a 'native' string (${language}) and an 'english' string.
+  4. 'questions': An array of exactly 2 multiple-choice comprehension questions in English about the story to verify understanding. Each question must have 'question' (string), 'options' (array of 4 English strings), and 'correctOption' (number 0-3).
+  
+  Output a single JSON object.`;
+
+  try {
+    const result = await model.generateContent(prompt);
+    const text = result.response.text().replace(/```json/g, '').replace(/```/g, '').trim();
+    return JSON.parse(text) as ReadingStory;
+  } catch (error) {
+    console.error("Error generating reading lesson:", error);
+    throw error;
+  }
+}

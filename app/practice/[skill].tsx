@@ -8,6 +8,7 @@ import Flashcards from '../../components/practice/Flashcards';
 import ChatUI from '../../components/practice/ChatUI';
 import AlphabetGridUI from '../../components/practice/AlphabetGridUI';
 import VoiceRecordingUI from '../../components/practice/VoiceRecordingUI';
+import ReadingUI from '../../components/practice/ReadingUI';
 import { useAuth } from '../../context/AuthContext';
 
 export default function PracticeScreen() {
@@ -53,6 +54,8 @@ export default function PracticeScreen() {
     PracticeComponent = <ChatUI skill={skill} title={title} />;
   } else if (skill?.includes('vocabulary')) {
     PracticeComponent = <Flashcards skill={skill} title={title} />;
+  } else if (skill === 'reading') {
+    PracticeComponent = <ReadingUI skill={skill} title={title} />;
   } else {
     PracticeComponent = <QuizUI skill={skill} title={title} />;
   }
