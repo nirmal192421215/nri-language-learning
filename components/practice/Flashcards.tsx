@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'expo-router';
 
 export default function Flashcards({ skill, title }: { skill: string, title: string }) {
-  const { user, updateProgress } = useAuth();
+  const { user, updateProgress, completeModule } = useAuth();
   const router = useRouter();
 
   const [cards, setCards] = useState<Flashcard[]>([]);
@@ -50,6 +50,7 @@ export default function Flashcards({ skill, title }: { skill: string, title: str
   const handleComplete = () => {
     const xpGained = cards.length * 5; // 5 XP per flashcard
     updateProgress(xpGained);
+    completeModule(skill.toLowerCase());
     router.replace('/(tabs)');
   };
 

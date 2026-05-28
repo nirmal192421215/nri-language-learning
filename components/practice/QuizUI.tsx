@@ -89,7 +89,8 @@ export default function QuizUI({ skill, title }: { skill: string, title: string 
       const isPassing = percentage >= 60;
       
       if (isPassing) {
-        completeModule('assessment').then(result => {
+        const moduleId = skill === 'mini-quiz' ? 'assessment' : skill.toLowerCase();
+        completeModule(moduleId).then(result => {
           if (result?.leveledUp) {
             setLeveledUp(true);
             setNewTier(result.newTier);
