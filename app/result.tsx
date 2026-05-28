@@ -49,14 +49,10 @@ export default function ResultScreen() {
       
       <ScrollView contentContainerStyle={styles.content}>
         <Animated.View entering={FadeInDown.duration(800).springify()} style={styles.card}>
-          <Text style={styles.congratsText}>Assessment Complete!</Text>
+          <Text style={styles.congratsText}>Path Selected!</Text>
           <View style={styles.badgeContainer}>
             <Text style={styles.levelText}>{level}</Text>
           </View>
-          <Text style={styles.scoreText}>You scored {finalScore}%</Text>
-          <Text style={{ fontSize: 16, color: '#059669', textAlign: 'center', fontWeight: 'bold', marginBottom: 10 }}>
-            ({finalScore / 10} out of 10 correct)
-          </Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
           
           <View style={styles.roadmapCard}>
