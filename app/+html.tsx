@@ -12,6 +12,18 @@ export default function Root({ children }: { children: ReactNode }) {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>NRI Kids! 🐒 Learn Your Roots</title>
+        <meta name="description" content="Fun language lessons for NRI kids! Learn Tamil, Hindi, Telugu, Malayalam & Kannada with games, stories and more." />
+        <meta property="og:title" content="NRI Kids! 🌺 Learn Your Heritage Language" />
+        <meta property="og:description" content="Fun lessons. Real fluency. Every day! Join thousands of NRI kids learning their heritage language." />
+        <meta property="og:image" content="https://nri-language-learning.vercel.app/og-image.png" />
+        <meta property="og:url" content="https://nri-language-learning.vercel.app" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="NRI Kids!" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="NRI Kids! Learn Your Heritage Language" />
+        <meta name="twitter:description" content="Fun lessons. Real fluency. Every day!" />
+        <meta name="twitter:image" content="https://nri-language-learning.vercel.app/og-image.png" />
 
         {/*
           Disable body scrolling on web. This makes ScrollView components work closer to how they do on native.

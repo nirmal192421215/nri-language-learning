@@ -1,6 +1,5 @@
 import { View, Text, Pressable, StyleSheet, ActivityIndicator, useWindowDimensions, Platform } from 'react-native';
 import { useRouter, Redirect } from 'expo-router';
-import { Head } from 'expo-router/head';
 import Animated, {
   FadeIn,
   FadeInDown,
@@ -114,22 +113,7 @@ export default function WelcomeScreen() {
   if (user) return <Redirect href="/(tabs)" />;
 
   return (
-    <>
-      <Head>
-        <title>NRI Kids! 🐒 Learn Your Roots</title>
-        <meta name="description" content="Fun language lessons for NRI kids! Learn Tamil, Hindi, Telugu, Malayalam & Kannada with games, stories and more." />
-        <meta property="og:title" content="NRI Kids! 🌺 Learn Your Heritage Language" />
-        <meta property="og:description" content="Fun lessons. Real fluency. Every day! Join thousands of NRI kids learning their heritage language." />
-        <meta property="og:image" content="https://nri-language-learning.vercel.app/og-image.png" />
-        <meta property="og:url" content="https://nri-language-learning.vercel.app" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="NRI Kids!" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="NRI Kids! Learn Your Heritage Language" />
-        <meta name="twitter:description" content="Fun lessons. Real fluency. Every day!" />
-        <meta name="twitter:image" content="https://nri-language-learning.vercel.app/og-image.png" />
-      </Head>
-      <View style={styles.container}>
+    <View style={styles.container}>
       {/* Hero gradient background */}
       <LinearGradient colors={['#D1FAE5', '#BAE6FD', '#EDE9FE']} style={StyleSheet.absoluteFill} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
 
@@ -200,7 +184,6 @@ export default function WelcomeScreen() {
 
       </Animated.View>
     </View>
-    </>
   );
 }
 
