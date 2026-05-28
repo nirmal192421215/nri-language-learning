@@ -231,7 +231,7 @@ export default function ProfileScreen() {
         <View style={{ height: 120 }} />
       </ScrollView>
 
-      <MascotAssistant message="Looking great, champ! ⭐" bottomOffset={80} />
+
     </View>
   );
 }
