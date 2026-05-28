@@ -39,15 +39,27 @@ function FloatingBubble({ emoji, top, left, right, bottom, delay = 0, size = 52 
   );
 }
 
-// Cartoon cloud shape
-function Cloud({ top, left, right, scale = 1 }: any) {
+// Animated floating cloud shape
+function Cloud({ top, left, right, scale = 1, delay = 0 }: any) {
+  const tx = useSharedValue(0);
+  useEffect(() => {
+    tx.value = withRepeat(
+      withSequence(
+        withTiming(18, { duration: 3000 + delay, easing: Easing.inOut(Easing.ease) }),
+        withTiming(-18, { duration: 3000 + delay, easing: Easing.inOut(Easing.ease) })
+      ),
+      -1,
+      true
+    );
+  }, []);
+  const animStyle = useAnimatedStyle(() => ({ transform: [{ translateX: tx.value }, { scale }] }));
   return (
-    <View style={[styles.cloud, { top, left, right, transform: [{ scale }] }]}>
+    <Animated.View style={[styles.cloud, { top, left, right }, animStyle]}>
       <View style={styles.cloudBody} />
       <View style={[styles.cloudBump, { left: 12, width: 36, height: 36 }]} />
       <View style={[styles.cloudBump, { left: 36, width: 48, height: 48 }]} />
       <View style={[styles.cloudBump, { right: 12, width: 32, height: 32 }]} />
-    </View>
+    </Animated.View>
   );
 }
 
@@ -105,10 +117,10 @@ export default function WelcomeScreen() {
       {/* Hero gradient background */}
       <LinearGradient colors={['#D1FAE5', '#BAE6FD', '#EDE9FE']} style={StyleSheet.absoluteFill} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
 
-      {/* Cartoon clouds */}
-      <Cloud top={40} left={-30} scale={0.8} />
-      <Cloud top={100} right={-20} scale={0.6} />
-      <Cloud top={200} left={60} scale={0.5} />
+      {/* Cartoon clouds - now gently drifting */}
+      <Cloud top={40} left={-30} scale={0.8} delay={0} />
+      <Cloud top={100} right={-20} scale={0.6} delay={800} />
+      <Cloud top={200} left={60} scale={0.5} delay={1400} />
 
       {/* Floating emoji icons */}
       <FloatingBubble emoji="📚" top={60} left={20} delay={300} size={50} />
