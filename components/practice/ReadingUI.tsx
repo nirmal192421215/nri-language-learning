@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, ActivityIndicator, Alert, SafeAreaView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { generateReadingLesson, ReadingStory } from '../../utils/ai';
 
@@ -141,11 +140,11 @@ export default function ReadingUI({ skill, title }: { skill: string, title: stri
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Pressable onPress={() => router.replace('/(tabs)')} style={styles.backBtn}>
-            <Ionicons name="close" size={24} color="#64748B" />
+            <Text style={{fontSize: 20}}>✖️</Text>
           </Pressable>
           <Text style={styles.headerTitle}>Story Time</Text>
           <Pressable onPress={() => setShowTranslations(!showTranslations)} style={styles.translateToggle}>
-            <Ionicons name="language" size={20} color="#F43F5E" />
+            <Text style={{fontSize: 16}}>🌐</Text>
             <Text style={styles.translateToggleText}>{showTranslations ? "Hide" : "Translate"}</Text>
           </Pressable>
         </View>
