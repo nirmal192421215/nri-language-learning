@@ -158,11 +158,11 @@ export default function ProfileScreen() {
           <>
             {/* Stats row */}
             <Animated.View entering={FadeInUp.delay(150).springify()} style={styles.statsRow}>
-              <Animated.View style={[styles.statCard, { backgroundColor: Colors.orangeLight, borderColor: Colors.orange }, flameStyle]}>
-                <Text style={styles.statEmoji}>🔥</Text>
+              <View style={[styles.statCard, { backgroundColor: Colors.orangeLight, borderColor: Colors.orange }]}>
+                <Animated.Text style={[styles.statEmoji, flameStyle]}>🔥</Animated.Text>
                 <Text style={[styles.statValue, { color: Colors.orangeDark }]}>{user.streak}</Text>
                 <Text style={styles.statLabel}>Day Streak</Text>
-              </Animated.View>
+              </View>
               <View style={[styles.statCard, { backgroundColor: Colors.yellowLight, borderColor: Colors.yellow }]}>
                 <Text style={styles.statEmoji}>⭐</Text>
                 <Text style={[styles.statValue, { color: Colors.yellowDark }]}>{user.xp.toLocaleString()}</Text>
