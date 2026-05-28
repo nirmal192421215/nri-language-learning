@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "nri-language-platform",
+    "name": "NRI Kids!",
     "slug": "nri-language-platform",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,7 +22,12 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "name": "NRI Kids!",
+      "shortName": "NRI Kids",
+      "description": "Learn your heritage language with NRI Kids! Fun lessons for Tamil, Hindi, Telugu, Malayalam & Kannada.",
+      "themeColor": "#22C55E",
+      "backgroundColor": "#ffffff"
     },
     "plugins": [
       "expo-router",
