@@ -29,10 +29,7 @@ const userSchema = new mongoose.Schema({
   lastLoginDate: { type: Date, default: Date.now },
   level: { type: String, default: "Beginner - Level 1" },
   levelProgress: { type: Number, default: 0 },
-  learningLanguage: { type: String, default: "tamil" },
-  unlockedCountries: { type: [String], default: ['india'] },
-  currentCountry: { type: String, default: 'india' },
-  coins: { type: Number, default: 0 }
+  learningLanguage: { type: String, default: "tamil" }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -139,31 +136,15 @@ app.post('/api/update-language', async (req, res) => {
   }
 });
 
-// API: Update Country Progress
-app.post('/api/update-country', async (req, res) => {
-  try {
-    const { email, unlockedCountries, currentCountry } = req.body;
-    const user = await User.findOneAndUpdate(
-      { email },
-      { unlockedCountries, currentCountry },
-      { new: true }
-    );
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 // API: Update Progress (XP)
 app.post('/api/update-progress', async (req, res) => {
   try {
-    const { email, xpGained, coinsGained } = req.body;
+    const { email, xpGained } = req.body;
     
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ error: "User not found" });
 
     const newXp = user.xp + xpGained;
-    const newCoins = user.coins + (coinsGained || 0);
     const currentTotalLevel = Math.floor(user.xp / 100);
     const newTotalLevel = Math.floor(newXp / 100);
     
@@ -189,7 +170,6 @@ app.post('/api/update-progress', async (req, res) => {
     }
 
     user.xp = newXp;
-    user.coins = newCoins;
     user.level = `${tier} - Level ${currentSubLevel}`;
     user.levelProgress = newXp % 100;
     
