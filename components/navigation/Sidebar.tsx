@@ -96,7 +96,7 @@ export default function Sidebar() {
       {/* Brand + Mascot */}
       <View style={styles.brandRow}>
         <Animated.View style={[styles.mascotCircle, monkeyStyle]}>
-          <Text style={styles.mascotEmoji}>🐒</Text>
+          <Image source={require('../../assets/images/monkey_mascot.png')} style={{ width: '100%', height: '100%', borderRadius: 26 }} />
         </Animated.View>
         <View>
           <Text style={styles.brandName}>NRI Kids!</Text>
