@@ -204,7 +204,7 @@ export default function CommunityScreen() {
         </View>
       )}
 
-      <MascotAssistant message="Say hi to your friends! 👋" />
+      <MascotAssistant message="Say hi to your friends! 👋" bottomOffset={100} />
     </KeyboardAvoidingView>
   );
 }

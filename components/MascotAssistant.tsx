@@ -13,9 +13,10 @@ import { Colors, Fonts, Radius, Shadow } from './KidsTheme';
 
 interface MascotAssistantProps {
   message?: string;
+  bottomOffset?: number;
 }
 
-export default function MascotAssistant({ message = "Ready to learn today? 🚀" }: MascotAssistantProps) {
+export default function MascotAssistant({ message = "Ready to learn today? 🚀", bottomOffset = 30 }: MascotAssistantProps) {
   const translateY = useSharedValue(0);
   const rotation = useSharedValue(0);
   const scale = useSharedValue(1);
@@ -77,7 +78,7 @@ export default function MascotAssistant({ message = "Ready to learn today? 🚀"
   const handlePressOut = () => { scale.value = withSpring(1, { damping: 8 }); };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { bottom: bottomOffset }]}>
       <Animated.View style={[styles.monkeyWrapper, animatedMonkeyStyle]}>
         {/* Speech bubble */}
         <Animated.View style={[styles.bubbleWrapper, bubbleAnimStyle]}>
