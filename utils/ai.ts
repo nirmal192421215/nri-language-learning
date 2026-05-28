@@ -32,6 +32,8 @@ export async function generateAssessmentQuestions(language: string): Promise<Ass
   - Questions 4 to 7 (id 3-6): Intermediate level (sentence structure, common phrases)
   - Questions 8 to 10 (id 7-9): Hard level (complex grammar, idioms, advanced vocabulary)
   
+  CRITICAL INSTRUCTION: Generate completely random and varied questions. Do not repeat the same concepts every time. (Random seed: ${Math.random()})
+  
   The 'question' text MUST be in English.
   The 4 'options' MUST be written in the native ${language} script.
   Output JSON array. Keys: id (0-9), question (string), options (4 strings), correctOption (0-3), type ("text").`;
@@ -101,6 +103,8 @@ export async function generatePracticeLesson(skill: string, level: string, langu
   The user is currently at the proficiency level: ${level}.
   Create exactly 50 multiple-choice practice questions focused specifically on the topic of [${skill}].
   
+  CRITICAL INSTRUCTION: Select a COMPLETELY RANDOM, highly varied set of 50 words, phrases, or grammar rules from a massive pool. Do not repeat the same exercises every time. Shuffle your selection. (Random seed: ${Math.random()})
+  
   CRITICAL DIFFICULTY INSTRUCTIONS:
   - If ${level} includes "Beginner", make the exercises very simple, using basic, common words and short sentences.
   - If ${level} includes "Intermediate", use conversational grammar and moderate vocabulary.
@@ -138,6 +142,8 @@ export async function generateSentenceLesson(level: string, language: string): P
 
   const prompt = `You are a language tutor teaching ${language}. The user is at level: ${level}.
   Create 5 sentence-building exercises.
+  
+  CRITICAL INSTRUCTION: Create completely random and varied sentences. Do not use the same sentences every time. Choose unexpected topics. (Random seed: ${Math.random()})
   
   CRITICAL DIFFICULTY INSTRUCTIONS:
   - If ${level} includes "Beginner", use very short 3-4 word sentences with simple foundational words.
@@ -219,6 +225,8 @@ export async function generateReadingLesson(level: string, language: string): Pr
 
   const prompt = `You are a language teacher teaching ${language}. The user is at level: ${level}.
   Create a short reading comprehension story in ${language}.
+  
+  CRITICAL INSTRUCTION: Write a COMPLETELY RANDOM, highly varied story. Choose a unique topic, characters, or situation every single time. DO NOT write the same common topics over and over again. Be creative. (Random seed: ${Math.random()})
   
   CRITICAL DIFFICULTY INSTRUCTIONS: 
   - If ${level} includes "Beginner", write 3-4 very simple sentences about daily life, animals, or food.
