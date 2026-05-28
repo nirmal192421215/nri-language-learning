@@ -102,13 +102,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (email: string, password?: string) => {
     setIsLoading(true);
-    try {
-      // First, try Firebase Authentication if a password is provided
-      if (password) {
+
+    // First, try Firebase Authentication if a password is provided.
+    // We do this outside the backend try/catch so auth errors are actually thrown back to the UI.
+    if (password) {
+      try {
         const { signInWithEmailFirebase } = await import('../utils/firebase');
         await signInWithEmailFirebase(email, password);
+      } catch (authError) {
+        setIsLoading(false);
+        throw authError; // Throw so the UI shows 'Login failed' instead of logging them in!
       }
-      
+    }
+
+    try {
       await AsyncStorage.setItem('userEmail', email);
       const res = await fetchWithTimeout(`${API_URL}/login`, {
         method: 'POST',
@@ -222,13 +229,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const register = async (email: string, password?: string, name?: string) => {
     setIsLoading(true);
-    try {
-      // Create user in Firebase
-      if (password) {
+
+    // Create user in Firebase first.
+    // Done outside the backend try/catch so auth errors throw back to UI.
+    if (password) {
+      try {
         const { signUpWithEmailFirebase } = await import('../utils/firebase');
         await signUpWithEmailFirebase(email, password);
+      } catch (authError) {
+        setIsLoading(false);
+        throw authError; // Throw so UI shows 'Registration failed' instead of proceeding!
       }
-      
+    }
+
+    try {
       await AsyncStorage.setItem('userEmail', email);
       const res = await fetchWithTimeout(`${API_URL}/register`, {
         method: 'POST',
@@ -243,8 +257,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setIsLoading(false);
       return fullUser;
     } catch (e: any) {
+      // If backend fails, fallback to offline user mode!
+      const lang = await AsyncStorage.getItem('learningLanguage') || 'tamil';
+      const fullUser = { id: 'local1', email, name: name || email.split('@')[0], avatar: 'tiger', xp: 0, streak: 0, level: 'Beginner', levelProgress: 0, completedModules: [], learningLanguage: lang };
+      setUser(fullUser);
       setIsLoading(false);
-      throw e;
+      return fullUser;
     }
   };
 
