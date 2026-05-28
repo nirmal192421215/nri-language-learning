@@ -176,19 +176,21 @@ export async function generateFlashcardLesson(skill: string, level: string, lang
     generationConfig: { responseMimeType: "application/json" }
   });
 
-  const prompt = `You are teaching ${language}. The user is at level: ${level}.
+  const prompt = `You are an expert language teacher teaching ${language}. The user is at level: ${level}.
   Create 10 flashcards for the topic [${skill}].
   
-  CRITICAL DIFFICULTY INSTRUCTIONS:
-  - If ${level} includes "Beginner", provide simple, single-word nouns or basic verbs.
-  - If ${level} includes "Intermediate", provide short phrases or conversational terms.
-  - If ${level} includes "Pro", provide advanced vocabulary, complex idioms, or professional terms.
-
-  'term' MUST be in the native ${language} script.
-  'translation' MUST be the English translation.
-  'emoji' MUST be a single, highly relevant Unicode emoji representing the term visually.
+  CRITICAL INSTRUCTION: Select a COMPLETELY RANDOM, highly varied set of 10 words from a massive pool of ${language} vocabulary suitable for this level. DO NOT output the same common words every time. Shuffle your selection. (Random seed: ${Math.random()})
   
-  Output JSON array of objects with keys: id (0-9), term (string), translation (string), emoji (string).`;
+  DIFFICULTY:
+  - "Beginner": simple nouns (animals, food, colors, family) or basic verbs.
+  - "Intermediate": intermediate phrases, emotions, weather, or conversational terms.
+  - "Pro": advanced vocabulary, idioms, professional terms, or abstract concepts.
+
+  'term' MUST be the native ${language} word/phrase.
+  'translation' MUST be the English translation.
+  'emoji' MUST be a single, colorful Unicode emoji (e.g. 🐶, 🍎, 🏃) that visually represents the term perfectly.
+  
+  Output a JSON array of EXACTLY 10 objects with keys: id (0-9), term (string), translation (string), emoji (string).`;
 
   try {
     const result = await model.generateContent(prompt);
