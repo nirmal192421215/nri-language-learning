@@ -57,12 +57,17 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     if (!email || !password) return;
     setIsLoading(true);
-    const userData = await login(email);
-    setIsLoading(false);
-    if (userData && userData.xp > 0) {
-      router.replace('/(tabs)');
-    } else {
-      router.replace('/language-selection');
+    try {
+      const userData = await login(email, password);
+      if (userData && userData.xp > 0) {
+        router.replace('/(tabs)');
+      } else {
+        router.replace('/language-selection');
+      }
+    } catch (err: any) {
+      alert('Login failed: ' + err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 

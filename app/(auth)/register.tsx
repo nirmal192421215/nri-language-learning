@@ -46,7 +46,7 @@ const inputStyles = StyleSheet.create({
 
 export default function RegisterScreen() {
   const router = useRouter();
-  const { login, loginWithGoogle } = useAuth();
+  const { register, loginWithGoogle } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,9 +58,14 @@ export default function RegisterScreen() {
   const handleRegister = async () => {
     if (!name || !email || !password) return;
     setIsLoading(true);
-    await login(email);
-    setIsLoading(false);
-    router.replace('/language-selection');
+    try {
+      await register(email, password, name);
+      router.replace('/language-selection');
+    } catch (err: any) {
+      alert('Registration failed: ' + err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGooglePress = async () => {

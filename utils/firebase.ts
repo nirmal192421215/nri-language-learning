@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 // @ts-ignore
-import { getAuth, initializeAuth, getReactNativePersistence, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, initializeAuth, getReactNativePersistence, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
@@ -66,4 +66,18 @@ export const signOutFirebase = async () => {
       console.error("Error signing out:", e);
     }
   }
+};
+
+export const signInWithEmailFirebase = async (email: string, password?: string) => {
+  if (!auth) throw new Error('Firebase Auth is not initialized. Please check your environment configuration.');
+  if (!password) throw new Error('Password is required.');
+  const result = await signInWithEmailAndPassword(auth, email, password);
+  return result.user;
+};
+
+export const signUpWithEmailFirebase = async (email: string, password?: string) => {
+  if (!auth) throw new Error('Firebase Auth is not initialized. Please check your environment configuration.');
+  if (!password) throw new Error('Password is required.');
+  const result = await createUserWithEmailAndPassword(auth, email, password);
+  return result.user;
 };

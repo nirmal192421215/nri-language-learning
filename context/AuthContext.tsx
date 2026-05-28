@@ -33,7 +33,8 @@ type UserData = {
 type AuthContextType = {
   user: UserData | null;
   isLoading: boolean;
-  login: (email: string) => Promise<UserData | null>;
+  login: (email: string, password?: string) => Promise<UserData | null>;
+  register: (email: string, password?: string, name?: string) => Promise<UserData | null>;
   logout: () => Promise<void>;
   updateProgress: (xpGained: number) => void;
   setAssessmentLevel: (level: string, score: number) => void;
@@ -99,9 +100,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => { isMounted = false; clearTimeout(failsafe); };
   }, []);
 
-  const login = async (email: string) => {
+  const login = async (email: string, password?: string) => {
     setIsLoading(true);
     try {
+      // First, try Firebase Authentication if a password is provided
+      if (password) {
+        const { signInWithEmailFirebase } = await import('../utils/firebase');
+        await signInWithEmailFirebase(email, password);
+      }
+      
       await AsyncStorage.setItem('userEmail', email);
       const res = await fetchWithTimeout(`${API_URL}/login`, {
         method: 'POST',
@@ -211,6 +218,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return { leveledUp, newTier: getTier(newLevel) };
+  };
+
+  const register = async (email: string, password?: string, name?: string) => {
+    setIsLoading(true);
+    try {
+      // Create user in Firebase
+      if (password) {
+        const { signUpWithEmailFirebase } = await import('../utils/firebase');
+        await signUpWithEmailFirebase(email, password);
+      }
+      
+      await AsyncStorage.setItem('userEmail', email);
+      const res = await fetchWithTimeout(`${API_URL}/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name: name || email.split('@')[0] })
+      });
+      const data = await res.json();
+      
+      const lang = await AsyncStorage.getItem('learningLanguage') || 'tamil';
+      const fullUser = { ...(data.error ? { id: 'local1', email, name: name || email.split('@')[0], avatar: 'tiger', xp: 0, streak: 0, level: 'Beginner', levelProgress: 0, completedModules: [] } : data), learningLanguage: lang };
+      setUser(fullUser);
+      setIsLoading(false);
+      return fullUser;
+    } catch (e: any) {
+      setIsLoading(false);
+      throw e;
+    }
   };
 
   const logout = async () => {
@@ -369,7 +404,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, updateProgress, setAssessmentLevel, updateProfile, setLearningLanguage, loginWithGoogle, completeModule }}>
+    <AuthContext.Provider value={{ user, isLoading, login, register, logout, updateProgress, setAssessmentLevel, updateProfile, setLearningLanguage, loginWithGoogle, completeModule }}>
       {children}
     </AuthContext.Provider>
   );
