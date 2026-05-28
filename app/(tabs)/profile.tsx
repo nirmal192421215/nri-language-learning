@@ -231,7 +231,7 @@ export default function ProfileScreen() {
         <View style={{ height: 120 }} />
       </ScrollView>
 
-      <MascotAssistant message="Looking great, champ! ⭐" />
+      <MascotAssistant message="Looking great, champ! ⭐" bottomOffset={80} />
     </View>
   );
 }
@@ -280,8 +280,8 @@ const styles = StyleSheet.create({
   saveBtn: { backgroundColor: Colors.yellow, borderRadius: Radius.pill, paddingVertical: 14, paddingHorizontal: 40 },
   saveBtnText: { fontFamily: Fonts.body, fontSize: 16, color: Colors.textDark },
 
-  statsRow: { flexDirection: 'row', gap: 10, marginBottom: 20 },
-  statCard: { flex: 1, alignItems: 'center', padding: 16, borderRadius: Radius.xl, borderWidth: 2.5 },
+  statsRow: { flexDirection: 'row', gap: 10, marginBottom: 20, overflow: 'hidden' },
+  statCard: { flex: 1, alignItems: 'center', padding: 16, borderRadius: Radius.xl, borderWidth: 2.5, overflow: 'hidden' },
   statEmoji: { fontSize: 28, marginBottom: 4 },
   statValue: { fontFamily: Fonts.heading, fontSize: 22 },
   statLabel: { fontFamily: Fonts.bodyReg, fontSize: 11, color: Colors.textMid, marginTop: 2 },
