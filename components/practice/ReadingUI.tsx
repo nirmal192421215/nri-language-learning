@@ -72,14 +72,14 @@ export default function ReadingUI({ skill, title }: { skill: string, title: stri
         setSelectedOption(null);
         setIsCorrect(null);
       } else {
-        handleFinish();
+        handleFinish(correct ? score + 1 : score);
       }
     }, 1500);
   };
 
-  const handleFinish = () => {
+  const handleFinish = (finalScore: number) => {
     setPhase('done');
-    const xpGained = 40; // Flat XP for reading
+    const xpGained = finalScore * 10;
     updateProgress(xpGained);
     completeModule(skill === 'reading' ? 'reading' : skill.toLowerCase());
   };
@@ -89,7 +89,7 @@ export default function ReadingUI({ skill, title }: { skill: string, title: stri
       <View style={styles.center}>
         <Text style={styles.doneTitle}>Fantastic Reading! 🎉</Text>
         <Text style={styles.doneScore}>You answered {score} out of {story.questions.length} questions correctly.</Text>
-        <Text style={styles.xpText}>+40 XP</Text>
+        <Text style={styles.xpText}>+{score * 10} XP</Text>
         <Pressable style={styles.btn} onPress={() => router.replace('/(tabs)')}>
           <Text style={styles.btnText}>Return to Dashboard</Text>
         </Pressable>

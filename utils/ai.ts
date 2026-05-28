@@ -237,7 +237,7 @@ export async function generateReadingLesson(level: string, language: string): Pr
   1. 'title': Story title in ${language}.
   2. 'titleEnglish': English translation of the title.
   3. 'paragraphs': An array of objects representing the sentences or paragraphs of the story. Each object must have a 'native' string (${language}) and an 'english' string.
-  4. 'questions': An array of exactly 2 multiple-choice comprehension questions in English about the story to verify understanding. Each question must have 'question' (string), 'options' (array of 4 English strings), and 'correctOption' (number 0-3).
+  4. 'questions': An array of exactly 3 multiple-choice comprehension questions in English about the story to verify understanding. Each question must have 'question' (string), 'options' (array of 4 English strings), and 'correctOption' (number 0-3).
   
   Output a single JSON object.`;
 
