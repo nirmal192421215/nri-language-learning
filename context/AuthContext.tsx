@@ -50,6 +50,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+    const failsafe = setTimeout(() => {
+      if (isMounted) setIsLoading(false);
+    }, 3000);
+
     const loadUser = async () => {
       try {
         const email = await AsyncStorage.getItem('userEmail');
@@ -84,10 +89,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } catch (err) {
         console.warn('Fatal error in loadUser:', err);
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          clearTimeout(failsafe);
+          setIsLoading(false);
+        }
       }
     };
     loadUser();
+    return () => { isMounted = false; clearTimeout(failsafe); };
   }, []);
 
   const login = async (email: string) => {
